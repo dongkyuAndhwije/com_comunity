@@ -1,0 +1,118 @@
+.container {
+  /* border: 1px solid black; */
+  height: 800px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  border: 1px solid gray;
+  height: 700px;
+  display: inline-block;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 5px 5px gray;
+}
+
+.top_box {
+  height: 70px;
+  background-color: #a840ff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_title_text {
+  color: white;
+  font-size: 25pt;
+  font-family: "cookie";
+}
+
+.login_login_box {
+  height: 50px;
+  /* border: 1px solid black; */
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_login_text {
+  font-size: 22pt;
+  font-family: "cookie";
+}
+
+.login_id_box {
+  height: 50px;
+  margin-top: 20px;
+  margin-left: 30px;
+  /* border: 1px solid black; */
+}
+
+.login_id_text {
+  color: #a840ff;
+  font-size: 22pt;
+  font-family: "cookie";
+}
+
+.login_id_inputbox {
+  height: 50px;
+  /* border: 1px solid black; */
+}
+
+.login_id_input {
+  height: 30px;
+  font-size: 15pt;
+  margin-left: 30px;
+  width: 350px;
+}
+
+.login_pw_box {
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 30px;
+  /* border: 1px solid black; */
+}
+
+.login_enterbottonbox {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.login_enterbotton {
+  background-color: #a840ff;
+  font-size: 16pt;
+  border-radius: 19px;
+  font-family: "cookie";
+  color: white;
+  width: 70px;
+  border: 0px;
+  height: 43px;
+  cursor: pointer;
+}
+
+.login_blank {
+  height: 170px;
+  /* border: 1px solid black; */
+}
+
+.login_bottom_text {
+  font-size: 13pt;
+  font-family: "gmarket";
+  text-decoration: none;
+  color: black;
+}
+
+.login_bottom_box {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
