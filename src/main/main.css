@@ -1,0 +1,111 @@
+.main_top {
+  height: 120px;
+  /* border: 1px solid black; */
+  width: "100%";
+  display: flex;
+  justify-content: space-between;
+}
+
+.main_toptitle {
+  height: 100px;
+  width: 700px;
+  /* border: 1px solid black; */
+  display: inline-block;
+  font-size: 40pt;
+  font-family: "cookie";
+  margin-top: 20px;
+  display: inline-block;
+  margin-left: 280px;
+}
+
+.main_loginbox {
+  height: 100px;
+  width: 137px;
+  /* border: 1px solid black; */
+  margin-top: 15px;
+  margin-right: 280px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.main_login {
+  margin-right: 10px;
+}
+
+.main_middlemenubox {
+  /* border: 1px solid black; */
+  height: 68px;
+  background-color: #6f00cc;
+  display: flex;
+  align-items: center;
+}
+
+.main_topsubtitle {
+  font-size: 15pt;
+  font-family: "gmarket";
+}
+
+.main_middlemenuboxinbox {
+  /* border: 1px solid black; */
+  margin-left: 280px;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15pt;
+  font-family: "gmarket";
+  height: 68px;
+  align-items: center;
+}
+
+.main_middlemenu {
+  display: block;
+  color: white;
+  width: 120px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* .main_middlemenu:hover{
+  background-color: #a868df;
+} */
+
+.main_middlemenu2 {
+  display: inline-block;
+  /* color: black; */
+  /* display: block; */
+  /* color: white; */
+  width: 100px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  text-align: center;
+}
+
+.main_middlemenubox2 {
+  height: 60px;
+  background-color: #e9e9e9;
+  box-shadow: 1px 1px lightgray;
+}
+
+.main_middlemenuboxinbox2 {
+  /* border: 1px solid black; */
+  margin-left: 280px;
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12pt;
+  /* font-family: 'gmarket'; */
+  height: 68px;
+  align-items: center;
+}
+
+.main_middlemenuboxinbox2 :hover {
+  color: blue;
+}
