@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./main.css";
+import BoardMain from "../board/boardMain";
 
 class Main extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class Main extends Component {
       Scolor: "#6f00cc",
       Icolor: "#6f00cc",
       ccolor: "#6f00cc",
+      clickmenu: "",
+      boardon: "none",
     };
   }
 
@@ -73,6 +76,13 @@ class Main extends Component {
     });
   };
 
+  Clickmenu = () => {
+    this.setState({
+      clickmenu: "c",
+      boardon: "inline",
+    });
+  };
+
   render() {
     return (
       <div>
@@ -128,7 +138,9 @@ class Main extends Component {
             className="main_middlemenuboxinbox2"
             style={{ display: this.state.Ldisplay }}
           >
-            <div className="main_middlemenu2">c</div>
+            <div className="main_middlemenu2" onClick={this.Clickmenu}>
+              c
+            </div>
             <div className="main_middlemenu2">java</div>
             <div className="main_middlemenu2">python</div>
             <div className="main_middlemenu2">c++</div>
@@ -210,6 +222,17 @@ class Main extends Component {
           </div>
 
           {/* ------------------ */}
+        </div>
+        <div className="main_contents">
+          {/* 게시판 자리 */}
+          <div
+            className="main_board_content"
+            style={{ display: this.state.boardon }}
+          >
+            <BoardMain clickmenu={this.state.clickmenu} />
+          </div>
+          {/* 채팅 자리 */}
+          <div className="main_chatt_content"></div>
         </div>
       </div>
     );

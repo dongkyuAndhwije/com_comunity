@@ -24,7 +24,38 @@ connection.connect(function (err) {
   if (err) console.error("mysql connection error : " + err);
   else console.log("mysql is connected successfully!");
 });
-//------------------------------------------------------------------------------------------------------
+//---게시판 ---------------------------------------------------------------------------------------------------
+
+app.post("/download", (req, res) => {
+  let sql = "SELECT * FROM table_";
+
+  connection.query(sql, function (err, rows, result) {
+    //연결!
+    if (err) throw err;
+    else {
+      // console.log(rows);
+      // console.log(result);
+      res.send(rows);
+    }
+  });
+});
+
+app.post("/upload", (req, res) => {
+  let title = req.body.title; //받은 데이터 req의 body의 title
+  let content = req.body.content; //받은 데이터 req의 body의 content
+  let writer = req.body.writer;
+  let time = req.body.time;
+
+  let sql = "INSERT INTO table_ (title,content,writer,time) VALUES(?, ?,?,?);";
+
+  connection.query(sql, [title, content, writer, time], function (err, result) {
+    //연결!
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
+});
+
+//---로그인---------------------------------------------------------------------------------------------------
 
 app.post("/login", (req, res) => {
   const id = req.body.id;
@@ -59,7 +90,7 @@ app.post("/login", (req, res) => {
   );
 });
 
-//------------------------------------------------------------------------------------------------------
+//----------회원가입--------------------------------------------------------------------------------------------
 
 app.post("/checkid", function (req, res) {
   let user_id = req.body.id;

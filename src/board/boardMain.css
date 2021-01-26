@@ -1,0 +1,11 @@
+.board_all {
+  /* width: 1000px; */
+  /* border: 1px solid black; */
+  height: 2000px;
+}
+
+.boardmain_title {
+  font-size: 20pt;
+  font-family: gmarket;
+  margin-left: 20px;
+}

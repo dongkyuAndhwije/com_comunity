@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login_page from "./login/login_page";
 import Sign_page from "./sign/sign_page";
 import Main from "./main/main";
+import App1 from "./board/app1";
+import Boardwrite from "./board/boardwrite";
 
 function App() {
   return (
@@ -19,6 +21,12 @@ function App() {
           </Route>
           <Route exact path="/main">
             <Main />
+          </Route>
+          <Route exact path="/App1">
+            <App1 />
+          </Route>
+          <Route exact path="/write">
+            <Boardwrite />
           </Route>
         </Switch>
       </div>
