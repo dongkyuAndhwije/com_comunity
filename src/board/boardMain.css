@@ -2,10 +2,21 @@
   /* width: 1000px; */
   /* border: 1px solid black; */
   height: 2000px;
+  border-right: 1px solid lightgray;
+  padding-right: 10px;
 }
 
 .boardmain_title {
   font-size: 20pt;
   font-family: gmarket;
-  margin-left: 20px;
+  margin-left: 10px;
+  display: inline;
+  /* color: #a868df; */
+}
+
+.boardmain_titlebox {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "gmarket";
 }

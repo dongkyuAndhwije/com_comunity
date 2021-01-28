@@ -6,13 +6,36 @@ class Boardwrite extends Component {
     this.state = {
       number: 1,
       title: "",
-      writer: "hwije",
+      writer: "",
       time: "",
       visit: 12,
       content: "",
-      useless: "",
+      userid: localStorage.getItem("userid"),
     };
   }
+
+  componentDidMount = () => {
+    let data = {
+      id: localStorage.getItem("userid"),
+    };
+    //usernickname가져옴
+    fetch("http://localhost:3001/getUser", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json === undefined) {
+          alert("오류");
+        } else {
+          this.setState({
+            writer: json[0].user_nick,
+          });
+          //   console.log(json[0].user_nick);
+        }
+      });
+  };
 
   onChange = (e) => {
     this.setState({
@@ -43,6 +66,7 @@ class Boardwrite extends Component {
       content: this.state.content,
       writer: this.state.writer,
       time: timestring,
+      userid: this.state.userid,
     };
 
     if (this.state.title == "" || this.state.content == "") {
@@ -57,9 +81,6 @@ class Boardwrite extends Component {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data), // json화 해버리기
-      });
-      this.setState({
-        useless: "a12",
       });
 
       alert("업로드 했습니다."); //제출 알림

@@ -30,7 +30,13 @@ class Login_page extends Component {
           alert("아이디 또는 비밀번호가 틀렸어요");
         } else {
           alert("로그인 성공");
-          window.localStorage.setItem("user", JSON.stringify(json));
+          localStorage.setItem("userid", json.id);
+          localStorage.setItem("usernick", json.nick);
+
+          console.log(localStorage.getItem("userid"));
+          console.log(localStorage.getItem("usernick"));
+
+          // window.localStorage.setItem("user", JSON.stringify(json));
           window.location.replace("/Main");
         }
       });

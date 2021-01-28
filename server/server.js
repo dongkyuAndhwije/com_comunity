@@ -26,6 +26,70 @@ connection.connect(function (err) {
 });
 //---게시판 ---------------------------------------------------------------------------------------------------
 
+app.post("/repDownload", (req, res) => {
+  let sql = "SELECT * FROM reple_";
+
+  connection.query(sql, function (err, rows, result) {
+    //연결!
+    if (err) throw err;
+    else {
+      // console.log(rows);
+      // console.log(result);
+      res.send(rows);
+    }
+  });
+});
+
+app.post("/repUpload", (req, res) => {
+  let reple = req.body.reple; //받은 데이터 req의 body의 content
+  let writer = req.body.writer;
+  let time = req.body.time;
+  let id = req.body.id;
+
+  let sql = "INSERT INTO reple_ (nick,time,reple,id) VALUES(?, ?,?,?);";
+
+  connection.query(sql, [writer, time, reple, id], function (err, result) {
+    //연결!
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
+});
+
+app.post("/getContent", (req, res) => {
+  let number = req.body.number;
+  let writer = req.body.writer;
+  let sql = "SELECT * FROM table_ WHERE number=? AND writer=?";
+
+  connection.query(sql, [number, writer], function (err, rows, result) {
+    //연결!
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      console.log(rows);
+      // console.log(result);
+
+      res.send(rows);
+    }
+  });
+});
+
+app.post("/getUser", (req, res) => {
+  let sql = "SELECT * FROM user_table WHERE user_id =(?)";
+
+  connection.query(sql, [req.body.id], function (err, rows, result) {
+    //연결!
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      // console.log(rows);
+      // console.log(result);
+      res.send(rows);
+    }
+  });
+});
+
 app.post("/download", (req, res) => {
   let sql = "SELECT * FROM table_";
 
@@ -45,14 +109,20 @@ app.post("/upload", (req, res) => {
   let content = req.body.content; //받은 데이터 req의 body의 content
   let writer = req.body.writer;
   let time = req.body.time;
+  let user_id = req.body.userid;
 
-  let sql = "INSERT INTO table_ (title,content,writer,time) VALUES(?, ?,?,?);";
+  let sql =
+    "INSERT INTO table_ (title,content,writer,time,id) VALUES(?, ?,?,?,?);";
 
-  connection.query(sql, [title, content, writer, time], function (err, result) {
-    //연결!
-    if (err) throw err;
-    console.log("1 record inserted");
-  });
+  connection.query(
+    sql,
+    [title, content, writer, time, user_id],
+    function (err, result) {
+      //연결!
+      if (err) throw err;
+      console.log("1 record inserted");
+    }
+  );
 });
 
 //---로그인---------------------------------------------------------------------------------------------------

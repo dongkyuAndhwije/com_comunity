@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./boardMain.css";
 import App from "./app1";
-import Board from "./boardMete";
+import BoardMete from "./boardMete";
 import Boardwrite from "./boardwrite";
 import $ from "jquery";
 import jQuery from "jquery";
@@ -23,16 +23,13 @@ class BoardMain extends Component {
     };
   }
 
-  componentDidMount = () => {
-    // if(this.state.clickmenu==='c')
-  };
+  componentDidMount = () => {};
 
   writeon = () => {
     this.setState({
       boardon: "none",
       writeon: "inline",
     });
-    // console.log(this.props.clickmenu);
   };
 
   boardon = () => {
@@ -45,17 +42,23 @@ class BoardMain extends Component {
   render() {
     return (
       <div className="board_all" id="aaa">
-        <p className="boardmain_title">C 게시판</p>
+        <div className="boardmain_titlebox">
+          <div className="boardmain_title">C 게시판</div>
+          <div>
+            <button onClick={this.boardon} style={{ cursor: "pointer" }}>
+              게시판
+            </button>
+            <button
+              onClick={this.writeon}
+              style={{ marginLeft: 10, marginBottom: 15, cursor: "pointer" }}
+            >
+              글쓰기
+            </button>
+          </div>
+        </div>
 
-        <button onClick={this.boardon}>게시판</button>
-        <button
-          onClick={this.writeon}
-          style={{ marginLeft: 10, marginBottom: 15 }}
-        >
-          글쓰기
-        </button>
         <div style={{ display: this.state.boardon }}>
-          <Board />
+          <BoardMete />
         </div>
         {/* <div className="board_main_blank"></div> */}
         {/* <App /> */}

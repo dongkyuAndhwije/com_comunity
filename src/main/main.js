@@ -11,7 +11,7 @@ class Main extends Component {
       Sdisplay: "none",
       Idisplay: "none",
       Cdisplay: "none",
-      Lcolor: "#6f00cc",
+      Lcolor: "#a868df",
       Scolor: "#6f00cc",
       Icolor: "#6f00cc",
       ccolor: "#6f00cc",

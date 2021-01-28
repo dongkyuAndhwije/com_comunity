@@ -1,0 +1,53 @@
+.rep_box {
+  border-bottom: 1px solid lightgray;
+  font-size: 10pt;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.rep_writer {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.rep_title {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+
+.rep_time {
+  margin-top: 10px;
+  margin-left: 10px;
+  /* font-size: 10pt; */
+  color: gray;
+}
+
+.rep_WTbox {
+  display: flex;
+}
+
+.rep_reco {
+  /* margin-top: 10px; */
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.rep_buttonbox {
+  display: flex;
+  margin-top: 10px;
+}
+
+.rep_rexobtn {
+  margin-top: 4px;
+  margin-right: 5px;
+
+  /* cursor: pointer; */
+}
+
+.rep_reple {
+  padding-right: 10px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}

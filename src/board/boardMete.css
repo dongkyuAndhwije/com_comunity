@@ -1,0 +1,120 @@
+.Mete_board {
+  width: 100;
+  height: 500;
+  /* border: 1px solid black; */
+  /* background-color: #6f00cc; */
+  /* display: inline; */
+}
+.mete_titlebox {
+  /* background-color: #f6eefd; */
+}
+
+.mete_Btitle {
+  font-size: 12pt;
+
+  border-top: 1px solid black;
+  padding-left: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
+
+  font-weight: 600;
+  /* border: 1px solid black; */
+}
+
+.mete_Bwriter {
+  /* margin-top: 10px; */
+  padding-left: 12px;
+}
+
+.mete_Bwtbox {
+  display: flex;
+  flex-direction: row;
+  /* padding-left: 10px; */
+  font-size: 10pt;
+  margin-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.mete_Btime {
+  color: gray;
+  margin-left: 10px;
+}
+
+.mete_Bwtbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mete_Bwtbox2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.mete_recomendButn {
+  margin-right: 10px;
+  font-size: 9pt;
+  cursor: pointer;
+  /* background-color: #f6eefd; */
+}
+
+.mete_content {
+  border-bottom: 1px solid black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 300px;
+  /* margin-bottom: 10px; */
+  /* background-color: #e7e7e749; */
+  padding-right: 10px;
+  padding-left: 10px;
+  /* border-left: 1px solid gray;
+  border-right: 1px solid gray; */
+}
+
+.mete_replebox {
+  height: 130px;
+  background-color: #eeeded;
+  /* margin-bottom: 10px; */
+  /* padding-top: 5px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mete_textarea {
+  height: 75px;
+  width: 605px;
+  /* text-decoration: none; */
+  border: 0px;
+}
+
+.mete_repletitle {
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  /* margin-left: 10px; */
+  /* margin-top: 10px; */
+}
+
+.mete_textareabox {
+  display: flex;
+  flex-direction: column;
+}
+
+.mete_replebtn {
+  /* height: 85px; */
+  color: white;
+  width: 75px;
+  background-color: black;
+  cursor: pointer;
+}
+
+.mete_textareabox2 {
+  display: flex;
+}
+.mete_line {
+  height: 2px;
+  border-bottom: 1px solid black;
+}
