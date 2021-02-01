@@ -43,6 +43,7 @@ class Boardwrite extends Component {
     });
     console.log(this.state.title);
     console.log(this.state.content);
+    console.log(this.props.clickmenu);
   };
 
   onSubmit = (e) => {
@@ -67,6 +68,7 @@ class Boardwrite extends Component {
       writer: this.state.writer,
       time: timestring,
       userid: this.state.userid,
+      clickmenu: this.props.clickmenu,
     };
 
     if (this.state.title == "" || this.state.content == "") {

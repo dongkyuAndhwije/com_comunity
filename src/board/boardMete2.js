@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import App1 from "./app1";
 import Boardreple from "./boardreple";
+import like from "./like.png";
 
 class BoardMete2 extends Component {
   constructor(props) {
@@ -60,9 +61,19 @@ class BoardMete2 extends Component {
               <div className="mete_Bwriter"> {this.props.data.writer}</div>
               <div className="mete_Btime">{this.props.data.time}</div>
             </div>
-            <button className="mete_recomendButn">
+            {/* <button className="mete_recomendButn">
               추천: {this.props.data.recomend}
-            </button>
+            </button> */}
+
+            <div className="mete_lickbox">
+              <img
+                src={like}
+                width="12"
+                height="12"
+                style={{ marginTop: 3, marginRight: 3 }}
+              />
+              <div style={{ marginRight: 15 }}>좋아요: 0</div>
+            </div>
           </div>
         </div>
         <div className="mete_content">{this.props.data.content}</div>
@@ -86,9 +97,7 @@ class BoardMete2 extends Component {
           </div>
         </div>
         <div className="mete_line"></div>
-        <div style={{ marginBottom: 30 }}>
-          <Boardreple />
-        </div>
+        <div style={{ marginBottom: 30 }}>{/* <Boardreple /> */}</div>
       </div>
     );
   }

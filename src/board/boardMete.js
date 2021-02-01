@@ -70,6 +70,7 @@ export default class Board extends Component {
       title: "",
       writer: "",
       contentOn: "none",
+      clickmenu: this.props.clickmenu,
     };
   }
 
@@ -78,10 +79,16 @@ export default class Board extends Component {
   //   const [page, setPage] = React.useState(0);
   //   const [rowsPerPage, setRowsPerPage] = React.useState(12);
 
-  componentWillMount = () => {
+  componentDidMount = () => {
+    // rows = [];
+
     let data = {
       id: "",
+      // clickmenu: this.state.clickmenu,
     };
+
+    // let clickmenu2:;
+    // console.log(data.clickmenu + "qewrqrqrqew324123432");
 
     fetch("http://localhost:3001/download", {
       method: "post",
@@ -96,15 +103,17 @@ export default class Board extends Component {
           //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
           //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
           for (let i = 0; i < json.length; i++) {
-            rows = rows.concat(
-              createData(
-                json[i].number,
-                json[i].title,
-                json[i].writer,
-                json[i].time,
-                json[i].recomend
-              )
-            );
+            if (json[i].kinds === this.props.clickmenu) {
+              rows = rows.concat(
+                createData(
+                  json[i].number,
+                  json[i].title,
+                  json[i].writer,
+                  json[i].time,
+                  json[i].recomend
+                )
+              );
+            }
           }
 
           console.log(json);
@@ -176,13 +185,13 @@ export default class Board extends Component {
     };
 
     return (
-      <div id="aa">
+      <div style={{ borderTop: "1px solid black", marginTop: "20px" }}>
         <div style={{ display: this.state.contentOn }}>
           <BoardMete2 data={data} />
         </div>
 
         {/* 본문 */}
-        <Paper>
+        <Paper style={{ marginTop: "10px" }}>
           <TableContainer>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -191,7 +200,11 @@ export default class Board extends Component {
                     <TableCell
                       key={column.id}
                       align={column.align}
-                      style={{ minWidth: column.minWidth }}
+                      style={{
+                        minWidth: column.minWidth,
+                        backgroundColor: "#eeeded",
+                        // borderTop: "1px solid black",
+                      }}
                     >
                       {column.label}
                     </TableCell>
@@ -205,13 +218,14 @@ export default class Board extends Component {
                     this.state.page * this.state.rowsPerPage +
                       this.state.rowsPerPage
                   )
-                  .map((row) => {
+                  .map((row, index) => {
                     return (
                       <TableRow
                         hover
                         role="checkbox"
                         tabIndex={-1}
-                        key={row.code}
+                        key={index}
+                        // key={row.code}
                         onClick={() => {
                           this.rowclick(row);
                         }}

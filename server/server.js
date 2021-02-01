@@ -110,13 +110,16 @@ app.post("/upload", (req, res) => {
   let writer = req.body.writer;
   let time = req.body.time;
   let user_id = req.body.userid;
+  let clickmenu = req.body.clickmenu;
+
+  console.log(clickmenu);
 
   let sql =
-    "INSERT INTO table_ (title,content,writer,time,id) VALUES(?, ?,?,?,?);";
+    "INSERT INTO table_ (title,content,writer,time,id,kinds) VALUES(?, ?,?,?,?,?);";
 
   connection.query(
     sql,
-    [title, content, writer, time, user_id],
+    [title, content, writer, time, user_id, clickmenu],
     function (err, result) {
       //연결!
       if (err) throw err;

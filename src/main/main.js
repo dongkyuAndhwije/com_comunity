@@ -6,7 +6,6 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuSelect: 0,
       Ldisplay: "flex",
       Sdisplay: "none",
       Idisplay: "none",
@@ -15,7 +14,7 @@ class Main extends Component {
       Scolor: "#6f00cc",
       Icolor: "#6f00cc",
       ccolor: "#6f00cc",
-      clickmenu: "",
+      clickmenu: "C",
       boardon: "none",
     };
   }
@@ -73,14 +72,17 @@ class Main extends Component {
       Scolor: "#6f00cc",
       Icolor: "#6f00cc",
       ccolor: "#a868df",
+      kinds: "",
     });
   };
 
-  Clickmenu = () => {
+  selectmenu = (e) => {
     this.setState({
-      clickmenu: "c",
+      clickmenu: e.target.value, // 변화가 있을때마다 state값을 초기화
       boardon: "inline",
     });
+    console.log(this.state.clickmenu);
+    // console.log(this.state.content);
   };
 
   render() {
@@ -90,12 +92,12 @@ class Main extends Component {
           <div className="main_toptitle">
             동규휘제닷컴
             <text className="main_topsubtitle">
-              &nbsp;&nbsp;컴공과 : 개발자를 꿈꾸는 사람들
+              &nbsp;&nbsp;개발자를 꿈꾸는 사람들
             </text>
           </div>
           <div className="main_loginbox">
             <button className="main_login">로그인</button>
-            <button>회원가입</button>
+            <button className="main_login">회원가입</button>
           </div>
         </div>
 
@@ -138,21 +140,92 @@ class Main extends Component {
             className="main_middlemenuboxinbox2"
             style={{ display: this.state.Ldisplay }}
           >
-            <div className="main_middlemenu2" onClick={this.Clickmenu}>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="C"
+            >
               c
-            </div>
-            <div className="main_middlemenu2">java</div>
-            <div className="main_middlemenu2">python</div>
-            <div className="main_middlemenu2">c++</div>
-            <div className="main_middlemenu2">javascript</div>
-            <div className="main_middlemenu2">c#</div>
+            </button>
+            <button
+              className="main_middlemenu2"
+              name="java"
+              onClick={this.selectmenu}
+              value="Java"
+            >
+              java
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="Python"
+            >
+              python
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="C++"
+            >
+              c++
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="Javascript"
+            >
+              javascript
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="C#"
+            >
+              c#
+            </button>
 
-            <div className="main_middlemenu2">php</div>
-            <div className="main_middlemenu2">sql</div>
-            <div className="main_middlemenu2">Ruby</div>
-            <div className="main_middlemenu2">Go</div>
-            <div className="main_middlemenu2">Swift</div>
-            <div className="main_middlemenu2">Cotlin</div>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="Php"
+            >
+              php
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="SQL"
+            >
+              sql
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="Ruby"
+            >
+              Ruby
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="Go"
+            >
+              Go
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="Swift"
+            >
+              Swift
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="Cotlin"
+            >
+              Cotlin
+            </button>
           </div>
 
           {/* ----------과목-------- */}

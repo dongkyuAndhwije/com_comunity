@@ -19,7 +19,7 @@ class BoardMain extends Component {
       content: "",
       boardon: "inline",
       writeon: "none",
-      clickmenu: this.props.clickmenu,
+      // clickmenu: this.props.clickmenu,
     };
   }
 
@@ -41,29 +41,26 @@ class BoardMain extends Component {
 
   render() {
     return (
-      <div className="board_all" id="aaa">
+      <div className="board_all">
         <div className="boardmain_titlebox">
-          <div className="boardmain_title">C 게시판</div>
+          <div className="boardmain_title">{this.props.clickmenu} 게시판</div>
           <div>
-            <button onClick={this.boardon} style={{ cursor: "pointer" }}>
+            <button onClick={this.boardon} className="boardmain_boardBtn">
               게시판
             </button>
-            <button
-              onClick={this.writeon}
-              style={{ marginLeft: 10, marginBottom: 15, cursor: "pointer" }}
-            >
+            <button onClick={this.writeon} className="boardmain_writeBtn">
               글쓰기
             </button>
           </div>
         </div>
 
         <div style={{ display: this.state.boardon }}>
-          <BoardMete />
+          <BoardMete clickmenu={this.props.clickmenu} />
         </div>
         {/* <div className="board_main_blank"></div> */}
         {/* <App /> */}
         <div style={{ display: this.state.writeon }}>
-          <Boardwrite />
+          <Boardwrite clickmenu={this.props.clickmenu} />
         </div>
       </div>
     );
