@@ -40,12 +40,12 @@ const columns = [
   },
 ];
 
-function createData(number, title, writer, date, recomend) {
-  //   const density = population / size;
-  return { number, title, writer, date, recomend };
-}
+// function createData(number, title, writer, date, recomend) {
+//   //   const density = population / size;
+//   return { number, title, writer, date, recomend };
+// }
 
-let rows = [];
+// let rows = [];
 
 const useStyles = makeStyles({
   root: {
@@ -80,45 +80,49 @@ export default class Board extends Component {
   //   const [rowsPerPage, setRowsPerPage] = React.useState(12);
 
   componentDidMount = () => {
-    // rows = [];
+    // let data = {
+    //   id: "",
+    // };
+    // fetch("http://localhost:3001/download", {
+    //   method: "post",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     if (json === undefined) {
+    //       alert("오류");
+    //     } else {
+    //       //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
+    //       //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
+    //       for (let i = 0; i < json.length; i++) {
+    //         if (json[i].kinds === this.props.clickmenu) {
+    //           rows = rows.concat(
+    //             createData(
+    //               json[i].number,
+    //               json[i].title,
+    //               json[i].writer,
+    //               json[i].time,
+    //               json[i].recomend
+    //             )
+    //           );
+    //         }
+    //       }
+    //       console.log(json);
+    //     }
+    //   });
+  };
 
-    let data = {
-      id: "",
-      // clickmenu: this.state.clickmenu,
-    };
-
-    // let clickmenu2:;
-    // console.log(data.clickmenu + "qewrqrqrqew324123432");
-
-    fetch("http://localhost:3001/download", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json === undefined) {
-          alert("오류");
-        } else {
-          //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
-          //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
-          for (let i = 0; i < json.length; i++) {
-            if (json[i].kinds === this.props.clickmenu) {
-              rows = rows.concat(
-                createData(
-                  json[i].number,
-                  json[i].title,
-                  json[i].writer,
-                  json[i].time,
-                  json[i].recomend
-                )
-              );
-            }
-          }
-
-          console.log(json);
-        }
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log("********************************");
+    if (this.props.clickmenu !== prevProps.clickmenu) {
+      console.log("업뎃?");
+      this.setState({
+        ...this.state,
+        selectTagNum: -1,
+        contentOn: "none",
       });
+    }
   };
 
   handleChangePage = (event, newPage) => {
@@ -212,7 +216,7 @@ export default class Board extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows
+                {this.props.rows
                   .slice(
                     this.state.page * this.state.rowsPerPage,
                     this.state.page * this.state.rowsPerPage +
@@ -255,7 +259,7 @@ export default class Board extends Component {
             // rowsPerPageOptions={[5, 10, 100]}
             rowsPerPageOptions={[12]}
             component="div"
-            count={rows.length}
+            count={this.props.rows.length}
             rowsPerPage={this.state.rowsPerPage}
             page={this.state.page}
             onChangePage={this.handleChangePage}

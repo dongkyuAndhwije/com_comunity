@@ -97,7 +97,9 @@ class BoardMete2 extends Component {
           </div>
         </div>
         <div className="mete_line"></div>
-        <div style={{ marginBottom: 30 }}>{/* <Boardreple /> */}</div>
+        <div style={{ marginBottom: 30 }}>
+          <Boardreple />
+        </div>
       </div>
     );
   }

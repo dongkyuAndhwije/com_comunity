@@ -55,7 +55,7 @@ class BoardMain extends Component {
         </div>
 
         <div style={{ display: this.state.boardon }}>
-          <BoardMete clickmenu={this.props.clickmenu} />
+          <BoardMete clickmenu={this.props.clickmenu} rows={this.props.rows} />
         </div>
         {/* <div className="board_main_blank"></div> */}
         {/* <App /> */}

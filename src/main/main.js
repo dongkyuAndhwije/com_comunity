@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import "./main.css";
 import BoardMain from "../board/boardMain";
+import { nodeName } from "jquery";
+
+function createData(number, title, writer, date, recomend) {
+  //   const density = population / size;
+  return { number, title, writer, date, recomend };
+}
+
+// let rows = [];
+
+let clickmenu;
 
 class Main extends Component {
   constructor(props) {
@@ -15,7 +25,9 @@ class Main extends Component {
       Icolor: "#6f00cc",
       ccolor: "#6f00cc",
       clickmenu: "C",
-      boardon: "none",
+      // boardon: "none",
+      rows: [],
+      contentOn: "none",
     };
   }
 
@@ -76,13 +88,63 @@ class Main extends Component {
     });
   };
 
-  selectmenu = (e) => {
-    this.setState({
-      clickmenu: e.target.value, // 변화가 있을때마다 state값을 초기화
-      boardon: "inline",
-    });
+  selectmenu = async (e) => {
+    this.setState(
+      {
+        clickmenu: e.target.value, // 변화가 있을때마다 state값을 초기화
+        boardon: "inline",
+      },
+      () => {
+        // rows = [];
+        this.setState(
+          {
+            rows: [],
+          },
+          () => {
+            let data = {
+              id: "",
+            };
+            fetch("http://localhost:3001/download", {
+              method: "post",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            })
+              .then((res) => res.json())
+              .then((json) => {
+                if (json === undefined) {
+                  alert("오류");
+                } else {
+                  //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
+                  //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
+                  for (let i = 0; i < json.length; i++) {
+                    if (json[i].kinds === this.state.clickmenu) {
+                      this.setState({
+                        rows: this.state.rows.concat(
+                          createData(
+                            json[i].number,
+                            json[i].title,
+                            json[i].writer,
+                            json[i].time,
+                            json[i].recomend
+                          )
+                        ),
+                      });
+                    }
+                  }
+
+                  console.log(json);
+                }
+              });
+
+            console.log(this.state.rows);
+          }
+        );
+      }
+    );
     console.log(this.state.clickmenu);
     // console.log(this.state.content);
+
+    // rows = [];
   };
 
   render() {
@@ -90,7 +152,7 @@ class Main extends Component {
       <div>
         <div className="main_top">
           <div className="main_toptitle">
-            동규휘제닷컴
+            컴퓨터닷컴
             <text className="main_topsubtitle">
               &nbsp;&nbsp;개발자를 꿈꾸는 사람들
             </text>
@@ -302,7 +364,10 @@ class Main extends Component {
             className="main_board_content"
             style={{ display: this.state.boardon }}
           >
-            <BoardMain clickmenu={this.state.clickmenu} />
+            <BoardMain
+              clickmenu={this.state.clickmenu}
+              rows={this.state.rows}
+            ></BoardMain>
           </div>
           {/* 채팅 자리 */}
           <div className="main_chatt_content"></div>
