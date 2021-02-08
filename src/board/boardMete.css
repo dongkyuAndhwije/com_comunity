@@ -63,7 +63,7 @@
   border-bottom: 1px solid black;
   padding-top: 20px;
   padding-bottom: 20px;
-  min-height: 300px;
+  min-height: 150px;
   /* margin-bottom: 10px; */
   /* background-color: #e7e7e749; */
   padding-right: 10px;
@@ -88,6 +88,7 @@
   width: 605px;
   /* text-decoration: none; */
   border: 0px;
+  outline: none;
 }
 
 .mete_repletitle {

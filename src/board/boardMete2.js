@@ -10,9 +10,29 @@ class BoardMete2 extends Component {
       reple: "",
       id: localStorage.getItem("userid"),
       writer: localStorage.getItem("usernick"),
+      number: "",
+      submintTF: true,
+      like_: 0,
+      reple_q: 0,
     };
   }
   componentDidMount = () => {};
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.data.recomend !== prevProps.data.recomend) {
+      this.setState(
+        {
+          ...this.state,
+          selectTagNum: -1,
+          like_: this.props.data.recomend,
+          // number: this.props.number,
+        },
+        () => {
+          // console.log(this.state.number + "000");
+        }
+      );
+    }
+  };
 
   onChange = (e) => {
     this.setState({
@@ -37,20 +57,66 @@ class BoardMete2 extends Component {
       writer: this.state.writer,
       time: timestring,
       id: this.state.id,
+      number: this.props.number,
     };
 
     console.log(data);
+    if (this.state.submintTF === true) {
+      this.setState(
+        {
+          submintTF: false,
+        },
+        () => {
+          fetch("http://localhost:3001/repUpload", {
+            //서버의 Singo라우터를 찾아간다
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data), // json화 해버리기
+          }).then((document.getElementById("mTxtArea").value = ""));
+        }
+      );
+    } else {
+      this.setState(
+        {
+          submintTF: true,
+        },
+        () => {
+          fetch("http://localhost:3001/repUpload", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }).then((document.getElementById("mTxtArea").value = ""));
+        }
+      );
+    }
+  };
 
-    fetch("http://localhost:3001/repUpload", {
-      //서버의 Singo라우터를 찾아간다
+  clickLikeB = () => {
+    let plus = this.props.data.recomend + 1;
+    console.log(this.props.data.number + "========" + plus);
+
+    let data = {
+      number: this.props.data.number,
+      recomend: plus,
+    };
+
+    fetch("http://localhost:3001/updateLikeB", {
       method: "post",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data), // json화 해버리기
-    });
-
-    alert("업로드 했습니다.");
-    // window.location.reload();
+      body: JSON.stringify(data),
+    }).then(
+      this.setState({
+        like_: plus,
+      })
+    );
   };
+
+  replq_q = (quentity) => {
+    this.setState({
+      reple_q: quentity,
+    });
+  };
+
   render() {
     return (
       <div className="Mete_board">
@@ -72,7 +138,13 @@ class BoardMete2 extends Component {
                 height="12"
                 style={{ marginTop: 3, marginRight: 3 }}
               />
-              <div style={{ marginRight: 15 }}>좋아요: 0</div>
+              <div
+                style={{ marginRight: 15, cursor: "pointer" }}
+                onClick={this.clickLikeB}
+              >
+                좋아요: {this.state.like_}
+                {/* 좋아요: {this.props.data.recomend} */}
+              </div>
             </div>
           </div>
         </div>
@@ -81,7 +153,9 @@ class BoardMete2 extends Component {
           <div className="mete_textareabox">
             <div className="mete_repletitle">
               <text>댓글쓰기</text>
-              <text style={{ marginRight: "10px" }}>댓글 수 : 0</text>
+              <text style={{ marginRight: "80px" }}>
+                댓글 수 : {this.state.reple_q}
+              </text>
             </div>
             <div className="mete_textareabox2">
               <textarea
@@ -89,6 +163,7 @@ class BoardMete2 extends Component {
                 name="reple"
                 placeholder="최대 200자까지 가능해요"
                 onChange={this.onChange}
+                id="mTxtArea"
               ></textarea>
               <button className="mete_replebtn" onClick={this.repleSubmit}>
                 등록
@@ -98,7 +173,12 @@ class BoardMete2 extends Component {
         </div>
         <div className="mete_line"></div>
         <div style={{ marginBottom: 30 }}>
-          <Boardreple />
+          <Boardreple
+            clickmenu={this.state.clickmenu}
+            number={this.props.number}
+            submintTF={this.state.submintTF}
+            replq_q={this.replq_q}
+          />
         </div>
       </div>
     );

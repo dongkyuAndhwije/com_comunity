@@ -2,53 +2,103 @@ import React, { Component } from "react";
 import "./boardreple.css";
 import like from "./like.png";
 
-let list = [];
+// let list = [];
 
-function createData(nick, time, reple, recomend) {
-  return { nick, time, reple, recomend };
+function createData(number, nick, time, reple, recomend) {
+  return { number, nick, time, reple, recomend };
 }
 
 class Boardreple extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //   무
+      list: [],
     };
   }
 
-  componentDidMount() {
-    let data = {};
+  fetchFunction = () => {
+    this.setState(
+      {
+        list: [],
+      },
+      () => {
+        let data = {
+          number: this.props.number,
+        };
+        fetch("http://localhost:3001/repDownload", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            if (json === undefined) {
+              alert("오류");
+            } else {
+              for (let i = 0; i < json.length; i++) {
+                this.setState(
+                  {
+                    list: this.state.list.concat(
+                      createData(
+                        json[i].number,
+                        json[i].nick,
+                        json[i].time,
+                        json[i].reple,
+                        json[i].recomend
+                      )
+                    ),
+                  },
+                  () => {
+                    this.props.replq_q(json.length);
+                  }
+                );
+              }
+              console.log(json);
+            }
+          });
+      }
+    );
+  };
 
-    fetch("http://localhost:3001/repDownload", {
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      this.props.number !== prevProps.number ||
+      this.props.submintTF !== prevProps.submintTF
+    ) {
+      this.setState(
+        {
+          ...this.state,
+          selectTagNum: -1,
+        },
+        () => {
+          this.fetchFunction();
+        }
+      );
+    }
+  };
+
+  clickLick = (number, recomend) => {
+    // console.log(number + "||" + recomend + "||||||||||||||||||||||");
+    let plus = recomend + 1;
+    console.log(number + "========" + plus);
+
+    let data = {
+      number: number,
+      recomend: plus,
+    };
+
+    fetch("http://localhost:3001/updateLike", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json === undefined) {
-          alert("오류");
-        } else {
-          //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
-          //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
-          for (let i = 0; i < json.length; i++) {
-            list = list.concat(
-              createData(
-                json[i].nick,
-                json[i].time,
-                json[i].reple,
-                json[i].recomend
-              )
-            );
-          }
+    }).then(this.fetchFunction());
+  };
 
-          console.log(json);
-        }
-      });
-  }
+  componentDidMount() {}
+
   render() {
-    const content = list.map((list) => (
-      <div className="rep_box">
+    const content = this.state.list.map((list) => (
+      <div className="rep_box" key={list.number}>
         <div className="rep_title">
           <div className="rep_WTbox">
             <div className="rep_writer">{list.nick}</div>
@@ -56,7 +106,14 @@ class Boardreple extends Component {
           </div>
           <div className="rep_buttonbox">
             <img src={like} width="12" height="12" className="rep_rexobtn" />
-            <div className="rep_reco">좋아요: {list.recomend}</div>
+            <div
+              className="rep_reco"
+              onClick={() => {
+                this.clickLick(list.number, list.recomend);
+              }}
+            >
+              좋아요: {list.recomend}
+            </div>
           </div>
         </div>
         <div className="rep_reple">{list.reple}</div>

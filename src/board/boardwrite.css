@@ -1,0 +1,47 @@
+.write_box {
+  display: flex;
+  flex-direction: column;
+  /* padding-top: 20px; */
+}
+
+.write_titlebox {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  /* border: 1px solid black; */
+}
+
+.write_title_ {
+  width: 750px;
+}
+
+.write_content_ {
+  width: 750px;
+  margin-top: 10px;
+  /* height: 600px; */
+}
+
+.write_contentbox {
+  margin-bottom: 10px;
+}
+
+.write_button {
+  margin-bottom: 15;
+  cursor: pointer;
+  border: 1px solid #11264f;
+  border-radius: 3px;
+  outline: 0;
+  background-color: #11264f;
+  color: white;
+  font-size: 10pt;
+  height: 30px;
+  font-family: "gmarket";
+}
+
+.write_titlename {
+  margin-top: 20px;
+  /* margin-left: 10px; */
+  font-family: "gmarket";
+  border-top: 2px solid black;
+  padding-top: 20px;
+  padding-left: 10px;
+}

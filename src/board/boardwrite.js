@@ -1,4 +1,16 @@
 import React, { Component } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import "./boardwrite.css";
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& > *": {
+//       margin: theme.spacing(1),
+//       width: "25ch",
+//     },
+//   },
+// }));
 
 class Boardwrite extends Component {
   constructor(props) {
@@ -87,23 +99,58 @@ class Boardwrite extends Component {
 
       alert("업로드 했습니다."); //제출 알림
       window.location.reload();
+      this.setState({
+        content: "",
+      });
       // setTimeout($("aaa").load(window.location.href + "aaa"), 1000);
     }
   };
   render() {
+    // const classes = useStyles();
     return (
       <div>
-        <input
+        <div className="write_titlename">글쓰기</div>
+        {/* <input
           name="title"
           placeholder="제목입력"
           onChange={this.onChange}
-        ></input>
-        <textarea
+        ></input> */}
+        {/* <textarea
           name="content"
-          placeholder="최대 200자까지 가능해요"
+          placeholder="최대 2000자까지 가능해요"
           onChange={this.onChange}
-        ></textarea>
-        <button onClick={this.onSubmit}>올리기</button>
+        ></textarea> */}
+        <div className="write_box">
+          <div className="write_titlebox">
+            <TextField
+              className="write_title_"
+              id="outlined-basic"
+              label="제목"
+              variant="outlined"
+              name="title"
+              placeholder="제목입력"
+              onChange={this.onChange}
+            />
+          </div>
+          <div className="write_contentbox">
+            <TextField
+              className="write_content_"
+              id="outlined-multiline-static"
+              label="내용"
+              multiline
+              rows={20}
+              // defaultValue="Default Value"
+              variant="outlined"
+              name="content"
+              placeholder="최대 2000자까지 가능해요"
+              onChange={this.onChange}
+            />
+          </div>
+
+          <button onClick={this.onSubmit} className="write_button">
+            올리기
+          </button>
+        </div>
       </div>
     );
   }

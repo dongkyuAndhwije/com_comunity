@@ -36,7 +36,7 @@ const columns = [
     label: "추천수",
     minWidth: 70,
     align: "right",
-    format: (value) => value.toFixed(2),
+    // format: (value) => value.toFixed(2),
   },
 ];
 
@@ -143,8 +143,14 @@ export default class Board extends Component {
     console.log("test");
   };
 
+  // plusRecomend = () => {
+  //   let plus = this.state.recomend;
+  //   this.setState({
+  //     recomend: plus,
+  //   });
+  // };
+
   rowclick = (row) => {
-    // console.log(row);
     window.scrollTo(0, 0);
     let data = {
       number: row.number,
@@ -161,17 +167,22 @@ export default class Board extends Component {
         if (json === undefined) {
           alert("오류");
         } else {
-          this.setState({
-            content: json[0].content,
-            id: json[0].id,
-            number: json[0].number,
-            recomend: json[0].recomend,
-            time: json[0].time,
-            title: json[0].title,
-            writer: json[0].writer,
-            content: json[0].content,
-            contentOn: "block",
-          });
+          this.setState(
+            {
+              content: json[0].content,
+              id: json[0].id,
+              number: json[0].number,
+              recomend: json[0].recomend,
+              time: json[0].time,
+              title: json[0].title,
+              writer: json[0].writer,
+              content: json[0].content,
+              contentOn: "block",
+            },
+            () => {
+              console.log(this.state.number);
+            }
+          );
         }
       });
   };
@@ -181,7 +192,7 @@ export default class Board extends Component {
       //Mete2로 넘겨주는 데이터
       content: this.state.content,
       id: this.state.id,
-      number: this.state.id,
+      number: this.state.number,
       recomend: this.state.recomend,
       time: this.state.time,
       title: this.state.title,
@@ -189,9 +200,13 @@ export default class Board extends Component {
     };
 
     return (
-      <div style={{ borderTop: "1px solid black", marginTop: "20px" }}>
+      <div style={{ borderTop: "2px solid black", marginTop: "20px" }}>
         <div style={{ display: this.state.contentOn }}>
-          <BoardMete2 data={data} />
+          <BoardMete2
+            clickmenu={this.props.clickmenu}
+            data={data}
+            number={this.state.number}
+          />
         </div>
 
         {/* 본문 */}

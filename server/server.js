@@ -26,10 +26,37 @@ connection.connect(function (err) {
 });
 //---게시판 ---------------------------------------------------------------------------------------------------
 
-app.post("/repDownload", (req, res) => {
-  let sql = "SELECT * FROM reple_";
+app.post("/updateLikeB", (req, res) => {
+  let number = req.body.number;
+  let recomend = req.body.recomend;
 
-  connection.query(sql, function (err, rows, result) {
+  let sql = "UPDATE table_ SET recomend = (?) WHERE number = (?)";
+
+  connection.query(sql, [recomend, number], function (err, result) {
+    //연결!
+    if (err) throw err;
+    // console.log("1 record update");
+  });
+});
+
+app.post("/updateLike", (req, res) => {
+  let number = req.body.number;
+  let recomend = req.body.recomend;
+
+  let sql = "UPDATE reple_ SET recomend = (?) WHERE number = (?)";
+
+  connection.query(sql, [recomend, number], function (err, result) {
+    //연결!
+    if (err) throw err;
+    // console.log("1 record update");
+  });
+});
+
+app.post("/repDownload", (req, res) => {
+  let number = req.body.number;
+  let sql = "SELECT * FROM reple_ WHERE kinds=(?)";
+
+  connection.query(sql, [number], function (err, rows, result) {
     //연결!
     if (err) throw err;
     else {
@@ -45,14 +72,19 @@ app.post("/repUpload", (req, res) => {
   let writer = req.body.writer;
   let time = req.body.time;
   let id = req.body.id;
+  let number = req.body.number;
 
-  let sql = "INSERT INTO reple_ (nick,time,reple,id) VALUES(?, ?,?,?);";
+  let sql = "INSERT INTO reple_ (nick,time,reple,id,kinds) VALUES(?, ?,?,?,?);";
 
-  connection.query(sql, [writer, time, reple, id], function (err, result) {
-    //연결!
-    if (err) throw err;
-    console.log("1 record inserted");
-  });
+  connection.query(
+    sql,
+    [writer, time, reple, id, number],
+    function (err, result) {
+      //연결!
+      if (err) throw err;
+      console.log("1 record inserted");
+    }
+  );
 });
 
 app.post("/getContent", (req, res) => {
@@ -91,9 +123,11 @@ app.post("/getUser", (req, res) => {
 });
 
 app.post("/download", (req, res) => {
-  let sql = "SELECT * FROM table_";
+  let clickmenu = req.body.clickmenu;
 
-  connection.query(sql, function (err, rows, result) {
+  let sql = "SELECT * FROM table_ WHERE kinds = (?)";
+
+  connection.query(sql, [clickmenu], function (err, rows, result) {
     //연결!
     if (err) throw err;
     else {

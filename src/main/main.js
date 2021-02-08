@@ -24,10 +24,9 @@ class Main extends Component {
       Scolor: "#6f00cc",
       Icolor: "#6f00cc",
       ccolor: "#6f00cc",
-      clickmenu: "C",
+      clickmenu: "",
       // boardon: "none",
       rows: [],
-      contentOn: "none",
     };
   }
 
@@ -103,6 +102,7 @@ class Main extends Component {
           () => {
             let data = {
               id: "",
+              clickmenu: this.state.clickmenu,
             };
             fetch("http://localhost:3001/download", {
               method: "post",
@@ -117,19 +117,17 @@ class Main extends Component {
                   //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
                   //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
                   for (let i = 0; i < json.length; i++) {
-                    if (json[i].kinds === this.state.clickmenu) {
-                      this.setState({
-                        rows: this.state.rows.concat(
-                          createData(
-                            json[i].number,
-                            json[i].title,
-                            json[i].writer,
-                            json[i].time,
-                            json[i].recomend
-                          )
-                        ),
-                      });
-                    }
+                    this.setState({
+                      rows: this.state.rows.concat(
+                        createData(
+                          json[i].number,
+                          json[i].title,
+                          json[i].writer,
+                          json[i].time,
+                          json[i].recomend
+                        )
+                      ),
+                    });
                   }
 
                   console.log(json);
@@ -152,10 +150,8 @@ class Main extends Component {
       <div>
         <div className="main_top">
           <div className="main_toptitle">
-            컴퓨터닷컴
-            <text className="main_topsubtitle">
-              &nbsp;&nbsp;개발자를 꿈꾸는 사람들
-            </text>
+            컴퓨터공학닷컴
+            <text className="main_topsubtitle">&nbsp;&nbsp;개발자 꿈나무</text>
           </div>
           <div className="main_loginbox">
             <button className="main_login">로그인</button>
