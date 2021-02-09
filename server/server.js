@@ -26,6 +26,46 @@ connection.connect(function (err) {
 });
 //---게시판 ---------------------------------------------------------------------------------------------------
 
+app.post("/deleteBoard", (req, res) => {
+  const rownumber = req.body.rownumber;
+
+  connection.query(
+    "DELETE FROM table_ WHERE number = (?)",
+    [rownumber],
+    function (err, rows, fields) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(true);
+        res.send(true);
+      }
+    }
+  );
+});
+
+app.post("/deletePw", (req, res) => {
+  const inputpw = req.body.inputpw;
+  const rownumber = req.body.rownumber;
+  console.log(inputpw + "======" + rownumber);
+
+  connection.query(
+    "SELECT user_pw FROM user_table WHERE user_id = (SELECT id FROM table_ WHERE number =(?))",
+    [rownumber],
+    function (err, rows, fields) {
+      if (rows[0] === undefined) {
+        res.send(false);
+        // console.log("1번오류");
+      } else if (rows[0].user_pw === inputpw) {
+        res.send(true);
+        // console.log("2번오류");
+      } else {
+        res.send(false);
+        // console.log("3번오류");
+      }
+    }
+  );
+});
+
 app.post("/updateLikeB", (req, res) => {
   let number = req.body.number;
   let recomend = req.body.recomend;

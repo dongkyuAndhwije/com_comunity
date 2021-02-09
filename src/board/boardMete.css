@@ -11,6 +11,8 @@
 /* } */
 
 .mete_Btitle {
+  display: flex;
+  justify-content: space-between;
   font-size: 12pt;
 
   /* border-top: 1px solid black; */
@@ -20,6 +22,17 @@
 
   font-weight: 600;
   /* border: 1px solid black; */
+}
+
+.mete_deletebutton {
+  cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  outline: 0;
+  margin-right: 10px;
+  background-color: white;
+  font-size: 9pt;
+  /* margin-top: 12px; */
 }
 
 .mete_Bwriter {

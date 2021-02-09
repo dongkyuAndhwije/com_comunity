@@ -74,6 +74,11 @@ export default class Board extends Component {
     };
   }
 
+  changeContentOn = () => {
+    this.setState({
+      contentOn: "none",
+    });
+  };
   //  const classes = useStyles();
 
   //   const [page, setPage] = React.useState(0);
@@ -206,6 +211,9 @@ export default class Board extends Component {
             clickmenu={this.props.clickmenu}
             data={data}
             number={this.state.number}
+            selectmenuFetch={this.props.selectmenuFetch}
+            rows={this.props.rows}
+            changeContentOn={this.changeContentOn}
           />
         </div>
 

@@ -55,12 +55,20 @@ class BoardMain extends Component {
         </div>
 
         <div style={{ display: this.state.boardon }}>
-          <BoardMete clickmenu={this.props.clickmenu} rows={this.props.rows} />
+          <BoardMete
+            clickmenu={this.props.clickmenu}
+            rows={this.props.rows}
+            selectmenuFetch={this.props.selectmenuFetch}
+          />
         </div>
         {/* <div className="board_main_blank"></div> */}
         {/* <App /> */}
         <div style={{ display: this.state.writeon }}>
-          <Boardwrite clickmenu={this.props.clickmenu} />
+          <Boardwrite
+            clickmenu={this.props.clickmenu}
+            boardon={this.boardon}
+            selectmenuFetch={this.props.selectmenuFetch}
+          />
         </div>
       </div>
     );

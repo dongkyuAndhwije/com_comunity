@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import App1 from "./app1";
 import Boardreple from "./boardreple";
 import like from "./like.png";
+import DeleteBoard from "./deleteBoard";
 
 class BoardMete2 extends Component {
   constructor(props) {
@@ -121,7 +122,17 @@ class BoardMete2 extends Component {
     return (
       <div className="Mete_board">
         <div className="mete_titlebox">
-          <div className="mete_Btitle">{this.props.data.title}</div>
+          <div className="mete_Btitle">
+            {this.props.data.title}
+            {/* <button className="mete_deletebutton">삭제</button> */}
+            <DeleteBoard
+              data={this.props.data}
+              selectmenuFetch={this.props.selectmenuFetch}
+              clickmenu={this.props.clickmenu}
+              rows={this.props.rows}
+              changeContentOn={this.props.changeContentOn}
+            />
+          </div>
           <div className="mete_Bwtbox">
             <div className="mete_Bwtbox2">
               <div className="mete_Bwriter"> {this.props.data.writer}</div>

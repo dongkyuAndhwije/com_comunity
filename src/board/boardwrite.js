@@ -98,7 +98,14 @@ class Boardwrite extends Component {
       });
 
       alert("업로드 했습니다."); //제출 알림
-      window.location.reload();
+      // window.location.reload();
+      this.props.boardon();
+      this.props.selectmenuFetch();
+      // document.getElementById("outlined - basic").value = "";
+      document.getElementById("outlined-basic").value = "";
+      document.getElementById("outlined-multiline-static").value = "";
+      // window.scrollTo(0, 0);
+
       this.setState({
         content: "",
       });
@@ -148,7 +155,7 @@ class Boardwrite extends Component {
           </div>
 
           <button onClick={this.onSubmit} className="write_button">
-            올리기
+            확인
           </button>
         </div>
       </div>

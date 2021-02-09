@@ -1,7 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, img } from "react";
 import "./main.css";
 import BoardMain from "../board/boardMain";
 import { nodeName } from "jquery";
+import counseling from "./counseling.png";
+
+import Login from "../login/login";
+import Sign from "../sign/sign";
 
 function createData(number, title, writer, date, recomend) {
   //   const density = population / size;
@@ -87,56 +91,61 @@ class Main extends Component {
     });
   };
 
-  selectmenu = async (e) => {
+  selectmenuFetch = () => {
+    // rows = [];
+    console.log("패치진입");
+    this.setState(
+      {
+        rows: [],
+      },
+      () => {
+        let data = {
+          id: "",
+          clickmenu: this.state.clickmenu,
+        };
+        fetch("http://localhost:3001/download", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            if (json === undefined) {
+              alert("오류");
+            } else {
+              //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
+              //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
+              for (let i = 0; i < json.length; i++) {
+                this.setState({
+                  rows: this.state.rows.concat(
+                    createData(
+                      json[i].number,
+                      json[i].title,
+                      json[i].writer,
+                      json[i].time,
+                      json[i].recomend
+                    )
+                  ),
+                });
+              }
+
+              console.log(json);
+            }
+          });
+
+        console.log(this.state.rows);
+      }
+    );
+  };
+
+  selectmenu = (e) => {
     this.setState(
       {
         clickmenu: e.target.value, // 변화가 있을때마다 state값을 초기화
         boardon: "inline",
       },
       () => {
-        // rows = [];
-        this.setState(
-          {
-            rows: [],
-          },
-          () => {
-            let data = {
-              id: "",
-              clickmenu: this.state.clickmenu,
-            };
-            fetch("http://localhost:3001/download", {
-              method: "post",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            })
-              .then((res) => res.json())
-              .then((json) => {
-                if (json === undefined) {
-                  alert("오류");
-                } else {
-                  //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
-                  //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
-                  for (let i = 0; i < json.length; i++) {
-                    this.setState({
-                      rows: this.state.rows.concat(
-                        createData(
-                          json[i].number,
-                          json[i].title,
-                          json[i].writer,
-                          json[i].time,
-                          json[i].recomend
-                        )
-                      ),
-                    });
-                  }
-
-                  console.log(json);
-                }
-              });
-
-            console.log(this.state.rows);
-          }
-        );
+        this.selectmenuFetch();
       }
     );
     console.log(this.state.clickmenu);
@@ -150,12 +159,28 @@ class Main extends Component {
       <div>
         <div className="main_top">
           <div className="main_toptitle">
-            컴퓨터공학닷컴
-            <text className="main_topsubtitle">&nbsp;&nbsp;개발자 꿈나무</text>
+            <img
+              src={counseling}
+              width="50"
+              height="50"
+              style={{ marginLeft: 20 }}
+            />
+            <div
+              style={{
+                display: "inline",
+                marginTop: 10,
+              }}
+            >
+              &nbsp;컴퓨터공학닷컴
+            </div>
+
+            {/* <text className="main_topsubtitle">&nbsp;&nbsp;개발자 꿈나무</text> */}
           </div>
           <div className="main_loginbox">
-            <button className="main_login">로그인</button>
-            <button className="main_login">회원가입</button>
+            <Login />
+            {/* <button className="main_login">로그인</button> */}
+            <Sign />
+            {/* <button className="main_login">회원가입</button> */}
           </div>
         </div>
 
@@ -363,6 +388,7 @@ class Main extends Component {
             <BoardMain
               clickmenu={this.state.clickmenu}
               rows={this.state.rows}
+              selectmenuFetch={this.selectmenuFetch}
             ></BoardMain>
           </div>
           {/* 채팅 자리 */}
