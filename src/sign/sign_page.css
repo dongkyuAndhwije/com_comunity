@@ -1,132 +1,53 @@
-.container {
-  /* border: 1px solid black; */
-  height: 800px;
-  margin-top: 100px;
+.sign_subtitle {
   display: flex;
   justify-content: center;
-}
-
-.item {
-  border: 1px solid gray;
-  height: 700px;
-  display: inline-block;
-  width: 450px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  box-shadow: 5px 5px gray;
-}
-
-.top_box {
-  height: 70px;
-  background-color: #a840ff;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sign_title_text {
-  color: white;
-  font-size: 25pt;
-  font-family: "cookie";
-}
-
-.sign_sign_box {
-  height: 50px;
-  /* border: 1px solid black; */
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sign_sign_text {
-  font-size: 22pt;
-  font-family: "cookie";
-}
-
-.sign_id_box {
-  height: 50px;
-  margin-top: 20px;
-  margin-left: 30px;
-  /* border: 1px solid black; */
-}
-
-.sign_id_text {
-  color: #a840ff;
-  font-size: 15pt;
-  font-family: "cookie";
-}
-
-.sign_id_inputbox {
-  height: 50px;
-  /* border: 1px solid black; */
-}
-
-.sign_id_input {
-  height: 30px;
-  font-size: 15pt;
-  margin-left: 30px;
-  width: 310px;
-  /* border-radius: 12px; */
-}
-
-.sign_pw_box {
-  height: 50px;
-  margin-top: 10px;
-  margin-left: 30px;
-  /* border: 1px solid black; */
-}
-
-.sign_enterbottonbox {
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.sign_enterbotton {
-  background-color: #a840ff;
-  font-size: 16pt;
-  border-radius: 19px;
-  font-family: "cookie";
-  color: white;
-  width: 70px;
-  border: 0px;
-  height: 43px;
-  cursor: pointer;
-}
-
-.sign_blank {
-  height: 80px;
-  /* border: 1px solid black; */
-}
-
-.sign_bottom_text {
-  font-size: 13pt;
   font-family: "gmarket";
-  text-decoration: none;
-  color: black;
+  /* font-weight: 700; */
+  /* font-size: x-large; */
+  margin-top: 25px;
+  width: 400px;
+  /* margin-bottom: 20px; */
 }
 
-.sign_bottom_box {
-  height: 50px;
+.sign_title {
   display: flex;
   justify-content: center;
-  align-items: center;
+  font-family: "gmarket";
+  font-weight: 700;
+  font-size: x-large;
+  margin-top: 10px;
+  width: 400px;
   margin-bottom: 30px;
+  color: #6f00cc;
+}
+
+.sign_inputbox {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  justify-content: space-between;
+}
+
+.sign_input {
+  width: 340px;
+}
+
+.sign_buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  /* cursor: pointer; */
+  margin-top: 50px;
 }
 
 .sign_id_right {
-  background-color: white;
-  height: 35px;
-  width: 50px;
-  margin-left: 20px;
-  color: #9932cc;
-  border: 3px solid #9932cc;
-  border-radius: 12px;
-  font-family: "cookie";
   cursor: pointer;
+  color: white;
+  border-radius: 3px;
+  font-family: "gmarket";
+  border: 0px;
+  /* background-color: #6f00cc; */
+  background-color: #a868df;
+  /* background-color: #ececec; */
+  outline-style: none;
 }

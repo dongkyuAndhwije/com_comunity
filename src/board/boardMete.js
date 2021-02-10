@@ -156,40 +156,44 @@ export default class Board extends Component {
   // };
 
   rowclick = (row) => {
-    window.scrollTo(0, 0);
-    let data = {
-      number: row.number,
-      writer: row.writer,
-    };
+    if (localStorage.getItem("userid") === "") {
+      alert("로그인 해주세요");
+    } else {
+      window.scrollTo(0, 0);
+      let data = {
+        number: row.number,
+        writer: row.writer,
+      };
 
-    fetch("http://localhost:3001/getContent", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json === undefined) {
-          alert("오류");
-        } else {
-          this.setState(
-            {
-              content: json[0].content,
-              id: json[0].id,
-              number: json[0].number,
-              recomend: json[0].recomend,
-              time: json[0].time,
-              title: json[0].title,
-              writer: json[0].writer,
-              content: json[0].content,
-              contentOn: "block",
-            },
-            () => {
-              console.log(this.state.number);
-            }
-          );
-        }
-      });
+      fetch("http://localhost:3001/getContent", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json === undefined) {
+            alert("오류");
+          } else {
+            this.setState(
+              {
+                content: json[0].content,
+                id: json[0].id,
+                number: json[0].number,
+                recomend: json[0].recomend,
+                time: json[0].time,
+                title: json[0].title,
+                writer: json[0].writer,
+                content: json[0].content,
+                contentOn: "block",
+              },
+              () => {
+                console.log(this.state.number);
+              }
+            );
+          }
+        });
+    }
   };
 
   render() {

@@ -39,7 +39,7 @@
 
 .main_login {
   margin-right: 10px;
-
+  width: 63px;
   cursor: pointer;
   border: 1px solid gray;
   border-radius: 3px;

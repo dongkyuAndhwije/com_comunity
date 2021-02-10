@@ -66,9 +66,13 @@ class AlertDialogSlide extends Component {
   };
 
   handleClickOpen = () => {
-    this.setState({
-      open: true,
-    });
+    if (localStorage.getItem("userid") === "") {
+      alert("로그인 해주세요");
+    } else {
+      this.setState({
+        open: true,
+      });
+    }
   };
 
   accept = () => {

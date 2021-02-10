@@ -26,10 +26,14 @@ class BoardMain extends Component {
   componentDidMount = () => {};
 
   writeon = () => {
-    this.setState({
-      boardon: "none",
-      writeon: "inline",
-    });
+    if (localStorage.getItem("userid") === "") {
+      alert("로그인 해주세요");
+    } else {
+      this.setState({
+        boardon: "none",
+        writeon: "inline",
+      });
+    }
   };
 
   boardon = () => {
@@ -38,6 +42,23 @@ class BoardMain extends Component {
       writeon: "none",
     });
   };
+
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   if (this.props.offBoardWrite !== prevProps.offBoardWrite) {
+  //     this.setState(
+  //       {
+  //         ...this.state,
+  //         selectTagNum: -1,
+  //         // boardon: "none",
+  //         // writeon: "none",
+  //         // number: this.props.number,
+  //       },
+  //       () => {
+  //         // console.log(this.state.number + "000");
+  //       }
+  //     );
+  //   }
+  // };
 
   render() {
     return (
@@ -66,8 +87,8 @@ class BoardMain extends Component {
         <div style={{ display: this.state.writeon }}>
           <Boardwrite
             clickmenu={this.props.clickmenu}
-            boardon={this.boardon}
             selectmenuFetch={this.props.selectmenuFetch}
+            boardon={this.boardon}
           />
         </div>
       </div>

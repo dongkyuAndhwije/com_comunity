@@ -29,10 +29,16 @@ class Main extends Component {
       Icolor: "#6f00cc",
       ccolor: "#6f00cc",
       clickmenu: "",
+      // offBoardWrite: "",
       // boardon: "none",
       rows: [],
     };
   }
+
+  componentDidMount = () => {
+    localStorage.setItem("userid", "");
+    localStorage.setItem("usernick", "");
+  };
 
   menuOnmouse0 = (e) => {
     this.setState({
@@ -139,20 +145,38 @@ class Main extends Component {
   };
 
   selectmenu = (e) => {
-    this.setState(
-      {
-        clickmenu: e.target.value, // 변화가 있을때마다 state값을 초기화
-        boardon: "inline",
-      },
-      () => {
-        this.selectmenuFetch();
-      }
-    );
+    if (localStorage.getItem("userid") === "") {
+      alert("로그인 해주세요");
+    } else {
+      this.setState(
+        {
+          clickmenu: e.target.value, // 변화가 있을때마다 state값을 초기화
+          boardon: "inline",
+        },
+        () => {
+          this.selectmenuFetch();
+        }
+      );
+    }
+
     console.log(this.state.clickmenu);
     // console.log(this.state.content);
 
     // rows = [];
   };
+
+  // clickLoginbutton = () => {
+  //   console.log("로그인클릭");
+  //   if (this.state.offBoardWrite === "") {
+  //     this.setState({
+  //       offBoardWrite: "off",
+  //     });
+  //   } else {
+  //     this.setState({
+  //       offBoardWrite: "",
+  //     });
+  //   }
+  // };
 
   render() {
     return (
@@ -177,7 +201,10 @@ class Main extends Component {
             {/* <text className="main_topsubtitle">&nbsp;&nbsp;개발자 꿈나무</text> */}
           </div>
           <div className="main_loginbox">
-            <Login />
+            <span>
+              <Login />
+            </span>
+
             {/* <button className="main_login">로그인</button> */}
             <Sign />
             {/* <button className="main_login">회원가입</button> */}
@@ -389,6 +416,7 @@ class Main extends Component {
               clickmenu={this.state.clickmenu}
               rows={this.state.rows}
               selectmenuFetch={this.selectmenuFetch}
+              // offBoardWrite={this.state.offBoardWrite}
             ></BoardMain>
           </div>
           {/* 채팅 자리 */}

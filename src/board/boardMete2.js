@@ -43,73 +43,81 @@ class BoardMete2 extends Component {
   };
 
   repleSubmit = () => {
-    let today = new Date();
-    let time = {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      date: today.getDate(),
-      hours: today.getHours(),
-      minutes: today.getMinutes(),
-    };
-    let timestring = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
-
-    let data = {
-      reple: this.state.reple,
-      writer: this.state.writer,
-      time: timestring,
-      id: this.state.id,
-      number: this.props.number,
-    };
-
-    console.log(data);
-    if (this.state.submintTF === true) {
-      this.setState(
-        {
-          submintTF: false,
-        },
-        () => {
-          fetch("http://localhost:3001/repUpload", {
-            //서버의 Singo라우터를 찾아간다
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data), // json화 해버리기
-          }).then((document.getElementById("mTxtArea").value = ""));
-        }
-      );
+    if (localStorage.getItem("userid") === "") {
+      alert("로그인 해주세요");
     } else {
-      this.setState(
-        {
-          submintTF: true,
-        },
-        () => {
-          fetch("http://localhost:3001/repUpload", {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          }).then((document.getElementById("mTxtArea").value = ""));
-        }
-      );
+      let today = new Date();
+      let time = {
+        year: today.getFullYear(),
+        month: today.getMonth() + 1,
+        date: today.getDate(),
+        hours: today.getHours(),
+        minutes: today.getMinutes(),
+      };
+      let timestring = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
+
+      let data = {
+        reple: this.state.reple,
+        writer: this.state.writer,
+        time: timestring,
+        id: this.state.id,
+        number: this.props.number,
+      };
+
+      console.log(data);
+      if (this.state.submintTF === true) {
+        this.setState(
+          {
+            submintTF: false,
+          },
+          () => {
+            fetch("http://localhost:3001/repUpload", {
+              //서버의 Singo라우터를 찾아간다
+              method: "post",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data), // json화 해버리기
+            }).then((document.getElementById("mTxtArea").value = ""));
+          }
+        );
+      } else {
+        this.setState(
+          {
+            submintTF: true,
+          },
+          () => {
+            fetch("http://localhost:3001/repUpload", {
+              method: "post",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            }).then((document.getElementById("mTxtArea").value = ""));
+          }
+        );
+      }
     }
   };
 
   clickLikeB = () => {
-    let plus = this.props.data.recomend + 1;
-    console.log(this.props.data.number + "========" + plus);
+    if (localStorage.getItem("userid") === "") {
+      alert("로그인 해주세요");
+    } else {
+      let plus = this.props.data.recomend + 1;
+      console.log(this.props.data.number + "========" + plus);
 
-    let data = {
-      number: this.props.data.number,
-      recomend: plus,
-    };
+      let data = {
+        number: this.props.data.number,
+        recomend: plus,
+      };
 
-    fetch("http://localhost:3001/updateLikeB", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }).then(
-      this.setState({
-        like_: plus,
-      })
-    );
+      fetch("http://localhost:3001/updateLikeB", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }).then(
+        this.setState({
+          like_: plus,
+        })
+      );
+    }
   };
 
   replq_q = (quentity) => {
@@ -159,7 +167,18 @@ class BoardMete2 extends Component {
             </div>
           </div>
         </div>
-        <div className="mete_content">{this.props.data.content}</div>
+        <div className="mete_content">
+          {this.props.data.content.split("\n").map((line) => {
+            return (
+              <span>
+                {line}
+                <br />
+              </span>
+            );
+          })}
+
+          {/* {this.props.data.content} */}
+        </div>
         <div className="mete_replebox">
           <div className="mete_textareabox">
             <div className="mete_repletitle">

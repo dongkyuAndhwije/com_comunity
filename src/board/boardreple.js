@@ -78,20 +78,24 @@ class Boardreple extends Component {
   };
 
   clickLick = (number, recomend) => {
-    // console.log(number + "||" + recomend + "||||||||||||||||||||||");
-    let plus = recomend + 1;
-    console.log(number + "========" + plus);
+    if (localStorage.getItem("userid") === "") {
+      alert("로그인 해주세요");
+    } else {
+      // console.log(number + "||" + recomend + "||||||||||||||||||||||");
+      let plus = recomend + 1;
+      console.log(number + "========" + plus);
 
-    let data = {
-      number: number,
-      recomend: plus,
-    };
+      let data = {
+        number: number,
+        recomend: plus,
+      };
 
-    fetch("http://localhost:3001/updateLike", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }).then(this.fetchFunction());
+      fetch("http://localhost:3001/updateLike", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }).then(this.fetchFunction());
+    }
   };
 
   componentDidMount() {}
