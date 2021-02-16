@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import WebView from "react-electron-web-view";
+import Iframe from "react-iframe";
 
 class App1 extends Component {
   constructor(props) {
@@ -112,6 +114,7 @@ class BoardItem extends React.Component {
     );
   }
 }
+// const WebView = require("react-electron-web-view");
 
 class BoardForm extends Component {
   state = {
@@ -132,22 +135,32 @@ class BoardForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        {" "}
-        <input
-          placeholder="title"
-          name="brdtitle"
-          value={this.state.brdtitle}
-          onChange={this.handleChange}
-        />{" "}
-        <input
-          placeholder="name"
-          name="brdwriter"
-          value={this.state.brdwriter}
-          onChange={this.handleChange}
-        />{" "}
-        <button type="submit">Save</button>{" "}
-      </form>
+      // <form onSubmit={this.handleSubmit}>
+      //   {" "}
+      //   <input
+      //     placeholder="title"
+      //     name="brdtitle"
+      //     value={this.state.brdtitle}
+      //     onChange={this.handleChange}
+      //   />{" "}
+      //   <input
+      //     placeholder="name"
+      //     name="brdwriter"
+      //     value={this.state.brdwriter}
+      //     onChange={this.handleChange}
+      //   />{" "}
+      //   <button type="submit">Save</button>{" "}
+      // </form>
+      <Iframe
+        url="https://www.cnet.co.kr/"
+        width="450px"
+        height="450px"
+        id="myId"
+        className="myClassname"
+        display="initial"
+        position="relative"
+      />
+      // <WebView src="https://www.google.com" />
     );
   }
 }

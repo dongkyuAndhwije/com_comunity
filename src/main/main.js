@@ -1,4 +1,4 @@
-import React, { Component, img } from "react";
+import React, { Component, img, webview } from "react";
 import "./main.css";
 import BoardMain from "../board/boardMain";
 import { nodeName } from "jquery";
@@ -6,6 +6,7 @@ import counseling from "./counseling.png";
 
 import Login from "../login/login";
 import Sign from "../sign/sign";
+import Iframe from "../ifram/ifram";
 
 function createData(number, title, writer, date, recomend) {
   //   const density = population / size;
@@ -13,7 +14,7 @@ function createData(number, title, writer, date, recomend) {
 }
 
 // let rows = [];
-
+// const WebView = require("react-electron-web-view");
 let clickmenu;
 
 class Main extends Component {
@@ -29,11 +30,21 @@ class Main extends Component {
       Icolor: "#6f00cc",
       ccolor: "#6f00cc",
       clickmenu: "",
+      clickifram: "",
       // offBoardWrite: "",
       // boardon: "none",
+      iframOn: "none",
       rows: [],
     };
   }
+
+  componentDidUpdate = () => {
+    // if (this.webview) {
+    //   this.webview.loadUrl(url, {
+    //     extraHeaders: "",
+    //   });
+    // }
+  };
 
   componentDidMount = () => {
     localStorage.setItem("userid", "");
@@ -152,6 +163,7 @@ class Main extends Component {
         {
           clickmenu: e.target.value, // 변화가 있을때마다 state값을 초기화
           boardon: "inline",
+          iframOn: "none",
         },
         () => {
           this.selectmenuFetch();
@@ -165,18 +177,18 @@ class Main extends Component {
     // rows = [];
   };
 
-  // clickLoginbutton = () => {
-  //   console.log("로그인클릭");
-  //   if (this.state.offBoardWrite === "") {
-  //     this.setState({
-  //       offBoardWrite: "off",
-  //     });
-  //   } else {
-  //     this.setState({
-  //       offBoardWrite: "",
-  //     });
-  //   }
-  // };
+  clickIfram = (e) => {
+    this.setState(
+      {
+        clickifram: e.target.value, // 변화가 있을때마다 state값을 초기화
+        boardon: "none",
+        iframOn: "block",
+      },
+      () => {
+        // console.log(this.state.clickifram);
+      }
+    );
+  };
 
   render() {
     return (
@@ -339,34 +351,95 @@ class Main extends Component {
           </div>
 
           {/* ----------과목-------- */}
-
           <div
             className="main_middlemenuboxinbox2"
             style={{ display: this.state.Sdisplay }}
           >
-            <div className="main_middlemenu2">
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="SE공학"
+            >
               소프트웨어<br></br>공학
-            </div>
-            <div className="main_middlemenu2">자료구조</div>
-            <div className="main_middlemenu2">운영체제</div>
-            <div className="main_middlemenu2">데이터통신</div>
-            <div className="main_middlemenu2">컴퓨터구조</div>
-            <div className="main_middlemenu2">컴퓨터개론</div>
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="자료구조"
+            >
+              자료구조
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="운영체제"
+            >
+              운영체제
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="데이터통신"
+            >
+              데이터통신
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="컴퓨터구조"
+            >
+              컴퓨터구조
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="컴퓨터개론"
+            >
+              컴퓨터개론
+            </button>
 
-            <div className="main_middlemenu2">
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="프로그래밍언어"
+            >
               프로그래밍<br></br>언어
-            </div>
-            <div className="main_middlemenu2">논리회로설계</div>
-            <div className="main_middlemenu2">
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="논리회로설계"
+            >
+              논리회로설계
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="모바일프로그래밍"
+            >
               모바일<br></br>프로그래밍
-            </div>
-            <div className="main_middlemenu2">
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="컴퓨터그래픽스"
+            >
               컴퓨터<br></br>그래픽스
-            </div>
-            <div className="main_middlemenu2">컴퓨터보안</div>
-            <div className="main_middlemenu2">
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="컴퓨터보안"
+            >
+              컴퓨터보안
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.selectmenu}
+              value="공업수학"
+            >
               공업/<br></br>이산수학
-            </div>
+            </button>
           </div>
 
           {/* ------------------ */}
@@ -374,19 +447,84 @@ class Main extends Component {
             className="main_middlemenuboxinbox2"
             style={{ display: this.state.Idisplay }}
           >
-            <div className="main_middlemenu2">전자신문</div>
-            <div className="main_middlemenu2">ADnet</div>
-            <div className="main_middlemenu2">블로터</div>
-            <div className="main_middlemenu2">씨넷코리아</div>
-            <div className="main_middlemenu2">IT World</div>
-            <div className="main_middlemenu2">디지털데일리</div>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="전자신문"
+            >
+              전자신문
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="ZDnet"
+            >
+              ZDnet
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="블로터"
+            >
+              블로터
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="씨넷코리아"
+            >
+              씨넷코리아
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="IT World"
+            >
+              IT World
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="디지털데일리"
+            >
+              디지털데일리
+            </button>
 
-            <div className="main_middlemenu2">케이벤치</div>
-            <div className="main_middlemenu2">얼리어답터</div>
-            <div className="main_middlemenu2">IT조선</div>
-            <div className="main_middlemenu2">IT뉴스</div>
-            <div className="main_middlemenu2">IT DALY</div>
-            <div className="main_middlemenu2">PC사랑</div>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="얼리어답터"
+            >
+              얼리어답터
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="IT조선"
+            >
+              IT조선
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="IT뉴스"
+            >
+              IT뉴스
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="IT DALY"
+            >
+              IT DALY
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="PC사랑"
+            >
+              PC사랑
+            </button>
           </div>
 
           {/* ------------------ */}
@@ -395,13 +533,60 @@ class Main extends Component {
             className="main_middlemenuboxinbox2"
             style={{ display: this.state.Cdisplay }}
           >
-            <div className="main_middlemenu2">로켓펀치</div>
-            <div className="main_middlemenu2">원티드</div>
-            <div className="main_middlemenu2">프로그래머스</div>
-            <div className="main_middlemenu2">사람인</div>
-            <div className="main_middlemenu2">잡코리아</div>
-            <div className="main_middlemenu2">잡플래닛</div>
-            <div className="main_middlemenu2" style={{ width: 500 }}></div>
+            {/* <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="로켓펀치"
+            >
+              로켓펀치
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="원티드"
+            >
+              원티드
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="프로그래머스"
+            >
+              프로그래머스
+            </button> */}
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="사람인"
+            >
+              사람인
+            </button>
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="잡코리아"
+            >
+              잡코리아
+            </button>
+
+            <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="와글"
+            >
+              와글
+            </button>
+            {/* <button
+              className="main_middlemenu2"
+              onClick={this.clickIfram}
+              value="잡플래닛"
+            >
+              잡플래닛
+            </button> */}
+            <button
+              className="main_middlemenu2"
+              style={{ width: 750 }}
+            ></button>
           </div>
 
           {/* ------------------ */}
@@ -419,8 +604,16 @@ class Main extends Component {
               // offBoardWrite={this.state.offBoardWrite}
             ></BoardMain>
           </div>
+
           {/* 채팅 자리 */}
-          <div className="main_chatt_content"></div>
+          <div
+            className="main_chatt_content"
+            style={{ display: this.state.boardon }}
+          ></div>
+
+          <div style={{ display: this.state.iframOn }}>
+            <Iframe clickifram={this.state.clickifram} />
+          </div>
         </div>
       </div>
     );
