@@ -1,16 +1,48 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const port = 3001;
-app.use(bodyParser.json());
-const mysql = require("mysql");
+const express = require("express"); //
+const app = express(); //
+const cors = require("cors"); //
+const bodyParser = require("body-parser"); //
+const port = 3001; //
+const route = require("./routes/index"); //없는거
 
-app.use(cors());
-// app.use("/", route);
-app.listen(port, () => {
+var http = require("http").createServer(app); //없는거
+const io = require("socket.io")(http); //없는거
+
+app.use(bodyParser.json()); //
+app.use(cors()); //
+app.use("/", route); //없는거
+
+io.on("connection", function (socket) {
+  console.log("소켓 접속 완료");
+
+  socket.on("roomjoin", (userid) => {
+    console.log(userid);
+    socket.join(userid);
+  });
+
+  socket.on("alert", (touserid) => {
+    // console.log("시발" + touserid);
+    io.to(touserid).emit("heejewake", touserid);
+  });
+});
+
+http.listen(port, () => {
   console.log(`express is running on ${port}`);
 });
+
+// const express = require("express");
+// const app = express();
+// const cors = require("cors");
+// const bodyParser = require("body-parser");
+// const port = 3001;
+// app.use(bodyParser.json());
+const mysql = require("mysql");
+
+// app.use(cors());
+// // app.use("/", route);
+// app.listen(port, () => {
+//   console.log(`express is running on ${port}`);
+// });
 
 let connection = mysql.createConnection({
   //mysql연결하기위함
@@ -20,10 +52,10 @@ let connection = mysql.createConnection({
   database: "com_community", //내 데이터베이스 이름
 });
 
-connection.connect(function (err) {
-  if (err) console.error("mysql connection error : " + err);
-  else console.log("mysql is connected successfully!");
-});
+// connection.connect(function (err) {
+//   if (err) console.error("mysql connection error : " + err);
+//   else console.log("mysql is connected successfully!");
+// });
 //---게시판 ---------------------------------------------------------------------------------------------------
 
 app.post("/deleteBoard", (req, res) => {
@@ -95,13 +127,13 @@ app.post("/updateLike", (req, res) => {
 app.post("/repDownload", (req, res) => {
   let number = req.body.number;
   let sql = "SELECT * FROM reple_ WHERE kinds=(?)";
-
+  console.log("eeeeeeeeeeeee");
   connection.query(sql, [number], function (err, rows, result) {
-    //연결!
-    if (err) throw err;
-    else {
-      // console.log(rows);
-      // console.log(result);
+    console.log("111111111112211");
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
       res.send(rows);
     }
   });
@@ -138,7 +170,7 @@ app.post("/getContent", (req, res) => {
       console.log(err);
       throw err;
     } else {
-      console.log(rows);
+      // console.log(rows);
       // console.log(result);
 
       res.send(rows);
@@ -186,7 +218,7 @@ app.post("/upload", (req, res) => {
   let user_id = req.body.userid;
   let clickmenu = req.body.clickmenu;
 
-  console.log(clickmenu);
+  // console.log(clickmenu);
 
   let sql =
     "INSERT INTO table_ (title,content,writer,time,id,kinds) VALUES(?, ?,?,?,?,?);";
@@ -245,7 +277,7 @@ app.post("/checkid", function (req, res) {
   console.log(req.body.id);
   let sql = "select user_id from user_table where user_id=?"; //sql 쿼리문-> id 에맞는 row들고 오고싶다
   connection.query(sql, [user_id], function (err, rows, fields) {
-    console.log(rows);
+    // console.log(rows);
     let checkid = new Object();
     checkid.tf = false;
 
@@ -265,7 +297,7 @@ app.post("/checknick", function (req, res) {
   console.log(req.body.nick);
   let sql = "select user_id from user_table where user_nick=?"; //sql 쿼리문-> id 에맞는 row들고 오고싶다
   connection.query(sql, [user_nick], function (err, rows, fields) {
-    console.log(rows);
+    // console.log(rows);
     let checkid = new Object();
     checkid.tf = false;
 

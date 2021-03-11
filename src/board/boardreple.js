@@ -17,6 +17,7 @@ class Boardreple extends Component {
   }
 
   fetchFunction = () => {
+    console.log("hiihi");
     this.setState(
       {
         list: [],
@@ -25,6 +26,7 @@ class Boardreple extends Component {
         let data = {
           number: this.props.number,
         };
+        // console.log("hihi");
         fetch("http://localhost:3001/repDownload", {
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -32,6 +34,7 @@ class Boardreple extends Component {
         })
           .then((res) => res.json())
           .then((json) => {
+            console.log("================================================");
             if (json === undefined) {
               alert("오류");
             } else {
@@ -77,6 +80,27 @@ class Boardreple extends Component {
     }
   };
 
+  // clickLick = (number, recomend) => {
+  //   if (localStorage.getItem("userid") === "") {
+  //     alert("로그인 해주세요");
+  //   } else {
+  //     // console.log(number + "||" + recomend + "||||||||||||||||||||||");
+  //     let plus = recomend + 1;
+  //     console.log(number + "========" + plus);
+
+  //     let data = {
+  //       number: number,
+  //       recomend: plus,
+  //     };
+
+  //     fetch("http://localhost:3001/updateLike", {
+  //       method: "post",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(data),
+  //     }).then();
+  //   }
+  // };
+
   clickLick = (number, recomend) => {
     if (localStorage.getItem("userid") === "") {
       alert("로그인 해주세요");
@@ -120,7 +144,17 @@ class Boardreple extends Component {
             </div>
           </div>
         </div>
-        <div className="rep_reple">{list.reple}</div>
+        {/* <div className="rep_reple">{list.reple}</div> */}
+        <div className="rep_reple">
+          {list.reple.split("\n").map((line) => {
+            return (
+              <span>
+                {line}
+                <br />
+              </span>
+            );
+          })}
+        </div>
       </div>
     ));
 

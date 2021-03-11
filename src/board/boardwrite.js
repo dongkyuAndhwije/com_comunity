@@ -161,16 +161,7 @@ class Boardwrite extends Component {
     return (
       <div>
         <div className="write_titlename">글쓰기</div>
-        {/* <input
-          name="title"
-          placeholder="제목입력"
-          onChange={this.onChange}
-        ></input> */}
-        {/* <textarea
-          name="content"
-          placeholder="최대 2000자까지 가능해요"
-          onChange={this.onChange}
-        ></textarea> */}
+
         <div className="write_box">
           <div className="write_titlebox">
             <TextField

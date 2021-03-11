@@ -7,6 +7,8 @@ import counseling from "./counseling.png";
 import Login from "../login/login";
 import Sign from "../sign/sign";
 import Iframe from "../ifram/ifram";
+// import Allmessage from "../chatt/chatt";
+import Message from "../message/message";
 
 function createData(number, title, writer, date, recomend) {
   //   const density = population / size;
@@ -133,6 +135,7 @@ class Main extends Component {
               //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
               //   rows = rows.concat(createData("dd", "dd", 126577691, 1972550));
               for (let i = 0; i < json.length; i++) {
+                // console.log(json.length);
                 this.setState({
                   rows: this.state.rows.concat(
                     createData(
@@ -150,7 +153,7 @@ class Main extends Component {
             }
           });
 
-        console.log(this.state.rows);
+        // console.log(this.state.rows);
       }
     );
   };
@@ -239,20 +242,20 @@ class Main extends Component {
             >
               Subject
             </div>
-            <div
+            {/* <div
               className="main_middlemenu"
               onMouseOver={this.menuOnmouse2}
               style={{ backgroundColor: this.state.Icolor }}
             >
               IT News
-            </div>
-            <div
+            </div> */}
+            {/* <div
               className="main_middlemenu"
               onMouseOver={this.menuOnmouse3}
               style={{ backgroundColor: this.state.ccolor }}
             >
               취업
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -447,7 +450,7 @@ class Main extends Component {
             className="main_middlemenuboxinbox2"
             style={{ display: this.state.Idisplay }}
           >
-            <button
+            {/* <button
               className="main_middlemenu2"
               onClick={this.clickIfram}
               value="전자신문"
@@ -524,7 +527,7 @@ class Main extends Component {
               value="PC사랑"
             >
               PC사랑
-            </button>
+            </button> */}
           </div>
 
           {/* ------------------ */}
@@ -609,11 +612,14 @@ class Main extends Component {
           <div
             className="main_chatt_content"
             style={{ display: this.state.boardon }}
-          ></div>
-
-          <div style={{ display: this.state.iframOn }}>
-            <Iframe clickifram={this.state.clickifram} />
+          >
+            {/* <Allmessage /> */}
+            <Message />
           </div>
+
+          {/* <div style={{ display: this.state.iframOn, width: "100%" }}>
+            <Iframe clickifram={this.state.clickifram} />
+          </div> */}
         </div>
       </div>
     );

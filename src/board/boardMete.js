@@ -265,6 +265,7 @@ export default class Board extends Component {
                           const value = row[column.id];
                           return (
                             <TableCell
+                              // key={this.props.rows.id}
                               key={column.id}
                               align={column.align}
                               style={{ cursor: "pointer" }}

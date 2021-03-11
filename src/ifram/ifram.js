@@ -99,10 +99,10 @@ class Ifram extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ width: "100%" }}>
         <Iframe
           url={this.state.nowiframe}
-          width="1500"
+          width="100%"
           height="1700"
           id="myId"
           //   className="myClassname"

@@ -182,10 +182,10 @@ class BoardMete2 extends Component {
         <div className="mete_replebox">
           <div className="mete_textareabox">
             <div className="mete_repletitle">
-              <text>댓글쓰기</text>
-              <text style={{ marginRight: "80px" }}>
+              <span>댓글쓰기</span>
+              <span style={{ marginRight: "80px" }}>
                 댓글 수 : {this.state.reple_q}
-              </text>
+              </span>
             </div>
             <div className="mete_textareabox2">
               <textarea
