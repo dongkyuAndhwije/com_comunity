@@ -9,8 +9,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import $ from "jquery";
-import jQuery from "jquery";
+// import $ from "jquery";
+// import jQuery from "jquery";
 import "./boardMete.css";
 import BoardMete2 from "./boardMete2";
 

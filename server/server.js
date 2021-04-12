@@ -3,14 +3,14 @@ const app = express(); //
 const cors = require("cors"); //
 const bodyParser = require("body-parser"); //
 const port = 3001; //
-const route = require("./routes/index"); //없는거
+const route = require("./routes/index"); //
 
-var http = require("http").createServer(app); //없는거
-const io = require("socket.io")(http); //없는거
+var http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
 app.use(bodyParser.json()); //
 app.use(cors()); //
-app.use("/", route); //없는거
+app.use("/", route);
 
 io.on("connection", function (socket) {
   console.log("소켓 접속 완료");
@@ -20,9 +20,35 @@ io.on("connection", function (socket) {
     socket.join(userid);
   });
 
-  socket.on("alert", (touserid) => {
-    // console.log("시발" + touserid);
-    io.to(touserid).emit("heejewake", touserid);
+  //------------------------------------------------------------
+
+  socket.on("allroomjoin", (usernick) => {
+    // 전체방 접속
+    socket.join("allmatchingroom");
+    if (io.sockets === undefined) {
+    } else {
+      // var clients = io.sockets.adapter.rooms["allmatchingroom"].sockets;
+      console.log(usernick + " " + "전체방 접속");
+    }
+  });
+
+  socket.on("send allmessage", (box) => {
+    //DB에 메시지를 저장한다.
+    connection.query(
+      "INSERT INTO message_table (nickname,message) VALUES (?,?)",
+      [box.nickname, box.message],
+      function (err, rows, fields) {
+        if (err) {
+          console.log("전체 채팅방 메시지 저장에 에러");
+          console.log(err);
+        }
+      }
+    );
+    console.log(box); //출력 됨
+    // io.emit("heejewake", "123");
+
+    io.emit("recieveallmessage", box);
+    console.log("여긴왔나");
   });
 });
 
@@ -30,19 +56,7 @@ http.listen(port, () => {
   console.log(`express is running on ${port}`);
 });
 
-// const express = require("express");
-// const app = express();
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
-// const port = 3001;
-// app.use(bodyParser.json());
 const mysql = require("mysql");
-
-// app.use(cors());
-// // app.use("/", route);
-// app.listen(port, () => {
-//   console.log(`express is running on ${port}`);
-// });
 
 let connection = mysql.createConnection({
   //mysql연결하기위함
@@ -52,10 +66,25 @@ let connection = mysql.createConnection({
   database: "com_community", //내 데이터베이스 이름
 });
 
-// connection.connect(function (err) {
-//   if (err) console.error("mysql connection error : " + err);
-//   else console.log("mysql is connected successfully!");
-// });
+//---메세지 가져오기 ---------------------------------------------------------------------------------------------------
+app.post("/allmatchGetMessage", (req, res) => {
+  console.log("들어옴");
+  connection.query(
+    "SELECT * FROM message_table order by num asc",
+    function (err, rows, field) {
+      if (err) {
+        console.log(err);
+        console.log("전체방 채팅 가져오기 err");
+      } else if (rows[0] != undefined) {
+        //보낼 메시지가 있음
+        console.log(rows);
+        res.send(rows);
+      } else {
+        //보낼 메시지가 없음
+      }
+    }
+  );
+});
 //---게시판 ---------------------------------------------------------------------------------------------------
 
 app.post("/deleteBoard", (req, res) => {

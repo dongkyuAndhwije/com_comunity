@@ -1,7 +1,7 @@
 import React, { Component, img, webview } from "react";
 import "./main.css";
 import BoardMain from "../board/boardMain";
-import { nodeName } from "jquery";
+// import { nodeName } from "jquery";
 import counseling from "./counseling.png";
 
 import Login from "../login/login";

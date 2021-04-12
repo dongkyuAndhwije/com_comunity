@@ -3,9 +3,9 @@ import "./boardMain.css";
 import App from "./app1";
 import BoardMete from "./boardMete";
 import Boardwrite from "./boardwrite";
-import $ from "jquery";
-import jQuery from "jquery";
-window.$ = window.jQuery = jQuery;
+// import $ from "jquery";
+// import jQuery from "jquery";
+// window.$ = window.jQuery = jQuery;
 
 class BoardMain extends Component {
   constructor(props) {
