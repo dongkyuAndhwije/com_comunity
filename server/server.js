@@ -12,6 +12,21 @@ app.use(bodyParser.json()); //
 app.use(cors()); //
 app.use("/api", route);
 
+var mysql = require("mysql");
+// nodemailer 모듈 요청
+
+let connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "jeong1207",
+  database: "com_community",
+});
+
+connection.connect(function (err) {
+  if (err) console.error("mysql connection error : " + err);
+  else console.log("mysql is connected successfully!");
+}); //mysql 연결
+
 io.on("connection", function (socket) {
   console.log("소켓 접속 완료");
 
@@ -34,12 +49,16 @@ io.on("connection", function (socket) {
 
   socket.on("send allmessage", (box) => {
     //DB에 메시지를 저장한다.
-    connection.query("INSERT INTO message_table (nickname,message) VALUES (?,?)", [box.nickname, box.message], function (err, rows, fields) {
-      if (err) {
-        console.log("전체 채팅방 메시지 저장에 에러");
-        console.log(err);
+    connection.query(
+      "INSERT INTO message_table (nickname,message) VALUES (?,?)",
+      [box.nickname, box.message],
+      function (err, rows, fields) {
+        if (err) {
+          console.log("전체 채팅방 메시지 저장에 에러");
+          console.log(err);
+        }
       }
-    });
+    );
     console.log(box); //출력 됨
     // io.emit("heejewake", "123");
 
