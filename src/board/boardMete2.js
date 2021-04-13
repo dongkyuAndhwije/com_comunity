@@ -108,7 +108,7 @@ class BoardMete2 extends Component {
         recomend: plus,
       };
 
-      fetch("/api/updateLikeB", {
+      fetch("http://localhost:3001/updateLikeB", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

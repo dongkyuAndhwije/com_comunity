@@ -165,7 +165,7 @@ export default class Board extends Component {
         writer: row.writer,
       };
 
-      fetch("/api/getContent", {
+      fetch("/getContent", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
