@@ -165,7 +165,7 @@ export default class Board extends Component {
         writer: row.writer,
       };
 
-      fetch("http://localhost:3001/getContent", {
+      fetch("/api/getContent", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -211,14 +211,7 @@ export default class Board extends Component {
     return (
       <div style={{ borderTop: "2px solid black", marginTop: "20px" }}>
         <div style={{ display: this.state.contentOn }}>
-          <BoardMete2
-            clickmenu={this.props.clickmenu}
-            data={data}
-            number={this.state.number}
-            selectmenuFetch={this.props.selectmenuFetch}
-            rows={this.props.rows}
-            changeContentOn={this.changeContentOn}
-          />
+          <BoardMete2 clickmenu={this.props.clickmenu} data={data} number={this.state.number} selectmenuFetch={this.props.selectmenuFetch} rows={this.props.rows} changeContentOn={this.changeContentOn} />
         </div>
 
         {/* 본문 */}
@@ -243,42 +236,34 @@ export default class Board extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.props.rows
-                  .slice(
-                    this.state.page * this.state.rowsPerPage,
-                    this.state.page * this.state.rowsPerPage +
-                      this.state.rowsPerPage
-                  )
-                  .map((row, index) => {
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={index}
-                        // key={row.code}
-                        onClick={() => {
-                          this.rowclick(row);
-                        }}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell
-                              // key={this.props.rows.id}
-                              key={column.id}
-                              align={column.align}
-                              style={{ cursor: "pointer" }}
-                            >
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
+                {this.props.rows.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map((row, index) => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={index}
+                      // key={row.code}
+                      onClick={() => {
+                        this.rowclick(row);
+                      }}
+                    >
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell
+                            // key={this.props.rows.id}
+                            key={column.id}
+                            align={column.align}
+                            style={{ cursor: "pointer" }}
+                          >
+                            {column.format && typeof value === "number" ? column.format(value) : value}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </TableContainer>

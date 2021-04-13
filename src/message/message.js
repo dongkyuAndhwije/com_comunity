@@ -6,7 +6,7 @@ import io from "socket.io-client";
 import Allview from "./allview";
 import Allview2 from "./allview2";
 
-const socket = io("localhost:3001");
+const socket = io();
 
 class message extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class message extends Component {
   }
 
   componentWillMount() {
-    fetch("http://localhost:3001/allmatchGetMessage", {
+    fetch("/api/allmatchGetMessage", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -93,19 +93,9 @@ class message extends Component {
               <ScrollToBottom className="chatBody">
                 {this.state.messages.map((message) => {
                   if (message.nickname === localStorage.getItem("usernick")) {
-                    return (
-                      <Allview
-                        nickname={message.nickname}
-                        message={message.message}
-                      />
-                    );
+                    return <Allview nickname={message.nickname} message={message.message} />;
                   } else {
-                    return (
-                      <Allview2
-                        nickname={message.nickname}
-                        message={message.message}
-                      />
-                    );
+                    return <Allview2 nickname={message.nickname} message={message.message} />;
                   }
                 })}
                 {/* {this.state.messages.map((message) => {
@@ -120,11 +110,7 @@ class message extends Component {
             </div>
 
             <div className="chatInputBox">
-              <input
-                className="messageInput"
-                name="message"
-                onChange={this.onchage}
-              />
+              <input className="messageInput" name="message" onChange={this.onchage} />
               <button onClick={this.sendClick}>전송</button>
             </div>
           </div>

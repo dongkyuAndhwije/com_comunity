@@ -27,7 +27,7 @@ class Boardreple extends Component {
           number: this.props.number,
         };
         // console.log("hihi");
-        fetch("http://localhost:3001/repDownload", {
+        fetch("/api/repDownload", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
@@ -41,15 +41,7 @@ class Boardreple extends Component {
               for (let i = 0; i < json.length; i++) {
                 this.setState(
                   {
-                    list: this.state.list.concat(
-                      createData(
-                        json[i].number,
-                        json[i].nick,
-                        json[i].time,
-                        json[i].reple,
-                        json[i].recomend
-                      )
-                    ),
+                    list: this.state.list.concat(createData(json[i].number, json[i].nick, json[i].time, json[i].reple, json[i].recomend)),
                   },
                   () => {
                     this.props.replq_q(json.length);
@@ -64,10 +56,7 @@ class Boardreple extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (
-      this.props.number !== prevProps.number ||
-      this.props.submintTF !== prevProps.submintTF
-    ) {
+    if (this.props.number !== prevProps.number || this.props.submintTF !== prevProps.submintTF) {
       this.setState(
         {
           ...this.state,
@@ -114,7 +103,7 @@ class Boardreple extends Component {
         recomend: plus,
       };
 
-      fetch("http://localhost:3001/updateLike", {
+      fetch("/api/updateLike", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

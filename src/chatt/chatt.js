@@ -11,7 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Photos from "./photos.png";
-const socket = io("localhost:3001");
+const socket = io();
 
 export default class Allmessage extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class Allmessage extends React.Component {
     //     }
     //   });
     // fetch("api/allmatchGetMessage", {
-    fetch("http://localhost:3001/allmatchGetMessage", {
+    fetch("/api/allmatchGetMessage", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -161,19 +161,9 @@ export default class Allmessage extends React.Component {
             <ScrollToBottom className="scrollbottom2">
               {this.state.messages.map((message) => {
                 if (message.nickname === this.state.nickname) {
-                  return (
-                    <Allview
-                      nickname={message.nickname}
-                      message={message.message}
-                    />
-                  );
+                  return <Allview nickname={message.nickname} message={message.message} />;
                 } else {
-                  return (
-                    <Allview2
-                      nickname={message.nickname}
-                      message={message.message}
-                    />
-                  );
+                  return <Allview2 nickname={message.nickname} message={message.message} />;
                 }
               })}
             </ScrollToBottom>
