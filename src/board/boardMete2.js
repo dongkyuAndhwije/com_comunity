@@ -71,7 +71,7 @@ class BoardMete2 extends Component {
             submintTF: false,
           },
           () => {
-            fetch("/api/repUpload", {
+            fetch("api/repUpload", {
               //서버의 Singo라우터를 찾아간다
               method: "post",
               headers: { "Content-Type": "application/json" },
@@ -85,7 +85,7 @@ class BoardMete2 extends Component {
             submintTF: true,
           },
           () => {
-            fetch("/api/repUpload", {
+            fetch("api/repUpload", {
               method: "post",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(data),
@@ -108,7 +108,7 @@ class BoardMete2 extends Component {
         recomend: plus,
       };
 
-      fetch("http://localhost:3001/updateLikeB", {
+      fetch("api/updateLikeB", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -133,7 +133,13 @@ class BoardMete2 extends Component {
           <div className="mete_Btitle">
             {this.props.data.title}
             {/* <button className="mete_deletebutton">삭제</button> */}
-            <DeleteBoard data={this.props.data} selectmenuFetch={this.props.selectmenuFetch} clickmenu={this.props.clickmenu} rows={this.props.rows} changeContentOn={this.props.changeContentOn} />
+            <DeleteBoard
+              data={this.props.data}
+              selectmenuFetch={this.props.selectmenuFetch}
+              clickmenu={this.props.clickmenu}
+              rows={this.props.rows}
+              changeContentOn={this.props.changeContentOn}
+            />
           </div>
           <div className="mete_Bwtbox">
             <div className="mete_Bwtbox2">
@@ -145,8 +151,16 @@ class BoardMete2 extends Component {
             </button> */}
 
             <div className="mete_lickbox">
-              <img src={like} width="12" height="12" style={{ marginTop: 3, marginRight: 3 }} />
-              <div style={{ marginRight: 15, cursor: "pointer" }} onClick={this.clickLikeB}>
+              <img
+                src={like}
+                width="12"
+                height="12"
+                style={{ marginTop: 3, marginRight: 3 }}
+              />
+              <div
+                style={{ marginRight: 15, cursor: "pointer" }}
+                onClick={this.clickLikeB}
+              >
                 좋아요: {this.state.like_}
                 {/* 좋아요: {this.props.data.recomend} */}
               </div>
@@ -169,10 +183,18 @@ class BoardMete2 extends Component {
           <div className="mete_textareabox">
             <div className="mete_repletitle">
               <span>댓글쓰기</span>
-              <span style={{ marginRight: "80px" }}>댓글 수 : {this.state.reple_q}</span>
+              <span style={{ marginRight: "80px" }}>
+                댓글 수 : {this.state.reple_q}
+              </span>
             </div>
             <div className="mete_textareabox2">
-              <textarea className="mete_textarea" name="reple" placeholder="최대 200자까지 가능해요" onChange={this.onChange} id="mTxtArea"></textarea>
+              <textarea
+                className="mete_textarea"
+                name="reple"
+                placeholder="최대 200자까지 가능해요"
+                onChange={this.onChange}
+                id="mTxtArea"
+              ></textarea>
               <button className="mete_replebtn" onClick={this.repleSubmit}>
                 등록
               </button>
@@ -181,7 +203,12 @@ class BoardMete2 extends Component {
         </div>
         <div className="mete_line"></div>
         <div style={{ marginBottom: 30 }}>
-          <Boardreple clickmenu={this.state.clickmenu} number={this.props.number} submintTF={this.state.submintTF} replq_q={this.replq_q} />
+          <Boardreple
+            clickmenu={this.state.clickmenu}
+            number={this.props.number}
+            submintTF={this.state.submintTF}
+            replq_q={this.replq_q}
+          />
         </div>
       </div>
     );

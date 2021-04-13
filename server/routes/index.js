@@ -57,32 +57,39 @@ router.post("/log", function (req, res) {
 //---메세지 가져오기 ---------------------------------------------------------------------------------------------------
 router.post("/allmatchGetMessage", (req, res) => {
   console.log("들어옴");
-  connection.query("SELECT * FROM message_table order by num asc", function (err, rows, field) {
-    if (err) {
-      console.log(err);
-      console.log("전체방 채팅 가져오기 err");
-    } else if (rows[0] != undefined) {
-      //보낼 메시지가 있음
-      console.log(rows);
-      res.send(rows);
-    } else {
-      //보낼 메시지가 없음
+  connection.query(
+    "SELECT * FROM message_table order by num asc",
+    function (err, rows, field) {
+      if (err) {
+        console.log(err);
+        console.log("전체방 채팅 가져오기 err");
+      } else if (rows[0] != undefined) {
+        //보낼 메시지가 있음
+        console.log(rows);
+        res.send(rows);
+      } else {
+        //보낼 메시지가 없음
+      }
     }
-  });
+  );
 });
 //---게시판 ---------------------------------------------------------------------------------------------------
 
 router.post("/deleteBoard", (req, res) => {
   const rownumber = req.body.rownumber;
 
-  connection.query("DELETE FROM table_ WHERE number = (?)", [rownumber], function (err, rows, fields) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(true);
-      res.send(true);
+  connection.query(
+    "DELETE FROM table_ WHERE number = (?)",
+    [rownumber],
+    function (err, rows, fields) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(true);
+        res.send(true);
+      }
     }
-  });
+  );
 });
 
 router.post("/deletePw", (req, res) => {
@@ -90,18 +97,22 @@ router.post("/deletePw", (req, res) => {
   const rownumber = req.body.rownumber;
   console.log(inputpw + "======" + rownumber);
 
-  connection.query("SELECT user_pw FROM user_table WHERE user_id = (SELECT id FROM table_ WHERE number =(?))", [rownumber], function (err, rows, fields) {
-    if (rows[0] === undefined) {
-      res.send(false);
-      // console.log("1번오류");
-    } else if (rows[0].user_pw === inputpw) {
-      res.send(true);
-      // console.log("2번오류");
-    } else {
-      res.send(false);
-      // console.log("3번오류");
+  connection.query(
+    "SELECT user_pw FROM user_table WHERE user_id = (SELECT id FROM table_ WHERE number =(?))",
+    [rownumber],
+    function (err, rows, fields) {
+      if (rows[0] === undefined) {
+        res.send(false);
+        // console.log("1번오류");
+      } else if (rows[0].user_pw === inputpw) {
+        res.send(true);
+        // console.log("2번오류");
+      } else {
+        res.send(false);
+        // console.log("3번오류");
+      }
     }
-  });
+  );
 });
 
 router.post("/updateLikeB", (req, res) => {
@@ -154,11 +165,15 @@ router.post("/repUpload", (req, res) => {
 
   let sql = "INSERT INTO reple_ (nick,time,reple,id,kinds) VALUES(?, ?,?,?,?);";
 
-  connection.query(sql, [writer, time, reple, id, number], function (err, result) {
-    //연결!
-    if (err) throw err;
-    console.log("1 record inserted");
-  });
+  connection.query(
+    sql,
+    [writer, time, reple, id, number],
+    function (err, result) {
+      //연결!
+      if (err) throw err;
+      console.log("1 record inserted");
+    }
+  );
 });
 
 router.post("/getContent", (req, res) => {
@@ -174,6 +189,7 @@ router.post("/getContent", (req, res) => {
     } else {
       // console.log(rows);
       // console.log(result);
+      console.log(rows);
 
       res.send(rows);
     }
@@ -221,13 +237,18 @@ router.post("/upload", (req, res) => {
 
   // console.log(clickmenu);
 
-  let sql = "INSERT INTO table_ (title,content,writer,time,id,kinds) VALUES(?, ?,?,?,?,?);";
+  let sql =
+    "INSERT INTO table_ (title,content,writer,time,id,kinds) VALUES(?, ?,?,?,?,?);";
 
-  connection.query(sql, [title, content, writer, time, user_id, clickmenu], function (err, result) {
-    //연결!
-    if (err) throw err;
-    console.log("1 record inserted");
-  });
+  connection.query(
+    sql,
+    [title, content, writer, time, user_id, clickmenu],
+    function (err, result) {
+      //연결!
+      if (err) throw err;
+      console.log("1 record inserted");
+    }
+  );
 });
 
 //---로그인---------------------------------------------------------------------------------------------------
@@ -238,23 +259,32 @@ router.post("/login", (req, res) => {
   const box = {};
   box.boolean = false;
 
-  connection.query("SELECT user_id FROM user_table WHERE user_id = (?)", [id], function (err, rows, fields) {
-    if (rows[0] === undefined) {
-      res.send(box);
-    } else {
-      connection.query("SELECT * FROM user_table WHERE  user_id = (?) AND user_pw =(?)", [id, pw], function (err, rows, fields) {
-        if (rows[0] === undefined) {
-          res.send(box);
-        } else {
-          box.id = rows[0].user_id;
-          box.pw = rows[0].user_pw;
-          box.nick = rows[0].user_nick;
-          box.boolean = true;
-          res.send(box);
-        }
-      });
+  connection.query(
+    "SELECT user_id FROM user_table WHERE user_id = (?)",
+    [id],
+    function (err, rows, fields) {
+      console.log("로그인");
+      if (rows[0] === undefined) {
+        res.send(box);
+      } else {
+        connection.query(
+          "SELECT * FROM user_table WHERE  user_id = (?) AND user_pw =(?)",
+          [id, pw],
+          function (err, rows, fields) {
+            if (rows[0] === undefined) {
+              res.send(box);
+            } else {
+              box.id = rows[0].user_id;
+              box.pw = rows[0].user_pw;
+              box.nick = rows[0].user_nick;
+              box.boolean = true;
+              res.send(box);
+            }
+          }
+        );
+      }
     }
-  });
+  );
 });
 
 //----------회원가입--------------------------------------------------------------------------------------------
@@ -304,13 +334,17 @@ router.post("/signup", (req, res) => {
   const id = req.body.id;
   const pw = req.body.pw;
   const nick = req.body.nick;
-  connection.query("insert into user_table (user_id,user_pw, user_nick) values (?,?,?)", [id, pw, nick], function (err, rows, fields) {
-    if (err) {
-      res.send(false);
-    } else {
-      res.send(true);
+  connection.query(
+    "insert into user_table (user_id,user_pw, user_nick) values (?,?,?)",
+    [id, pw, nick],
+    function (err, rows, fields) {
+      if (err) {
+        res.send(false);
+      } else {
+        res.send(true);
+      }
     }
-  });
+  );
 });
 
 module.exports = router;

@@ -105,14 +105,18 @@ class Login extends Component {
   };
 
   goSign = (e) => {
-    if (this.state.idcheck === true && this.state.niccheck === true && this.state.pwcheck === true) {
+    if (
+      this.state.idcheck === true &&
+      this.state.niccheck === true &&
+      this.state.pwcheck === true
+    ) {
       const user_info = {
         id: this.state.id,
         pw: this.state.pw,
         pw2: this.state.pw2,
         nick: this.state.nick,
       };
-      fetch("/api/signup", {
+      fetch("api/signup", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -164,7 +168,14 @@ class Login extends Component {
         >
           회원가입
         </button>
-        <Dialog open={this.state.open} TransitionComponent={Transition} keepMounted onClose={this.handleClose} aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
+        <Dialog
+          open={this.state.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
           <DialogContent>
             <div className="sign_subtitle">컴퓨터공학닷컴</div>
             <div className="sign_title">

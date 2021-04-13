@@ -36,7 +36,7 @@ class Login extends Component {
         id: this.state.id,
         pw: this.state.pw,
       };
-      fetch("/api/login", {
+      fetch("api/login", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -131,7 +131,14 @@ class Login extends Component {
         >
           {this.state.button_name}
         </button>
-        <Dialog open={this.state.open} TransitionComponent={Transition} keepMounted onClose={this.handleClose} aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
+        <Dialog
+          open={this.state.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
           <div className="login_subtitle">컴퓨터공학닷컴</div>
           <div className="login_title">
             로그인

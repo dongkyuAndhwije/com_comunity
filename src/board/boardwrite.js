@@ -49,7 +49,7 @@ class Boardwrite extends Component {
         id: localStorage.getItem("userid"),
       };
       //usernickname가져옴
-      fetch("/api/getUser", {
+      fetch("api/getUser", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -84,7 +84,7 @@ class Boardwrite extends Component {
       id: localStorage.getItem("userid"),
     };
     //usernickname가져옴
-    fetch("/api/getUser", {
+    fetch("api/getUser", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -130,7 +130,7 @@ class Boardwrite extends Component {
                 //내용 입력값의 길이가 200자가 넘어가면 alert발동
                 alert("2000자를 초과 했어요");
               } else {
-                fetch("/upload", {
+                fetch("api/upload", {
                   //서버의 Singo라우터를 찾아간다
                   method: "post",
                   headers: { "Content-Type": "application/json" },
@@ -164,7 +164,15 @@ class Boardwrite extends Component {
 
         <div className="write_box">
           <div className="write_titlebox">
-            <TextField className="write_title_" id="outlined-basic" label="제목" variant="outlined" name="title" placeholder="제목입력" onChange={this.onChange} />
+            <TextField
+              className="write_title_"
+              id="outlined-basic"
+              label="제목"
+              variant="outlined"
+              name="title"
+              placeholder="제목입력"
+              onChange={this.onChange}
+            />
           </div>
           <div className="write_contentbox">
             <TextField

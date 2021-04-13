@@ -19,12 +19,13 @@ class message extends Component {
   }
 
   componentWillMount() {
-    fetch("/api/allmatchGetMessage", {
+    const box = { data: "hi" };
+    fetch("api/allmatchGetMessage", {
       method: "post",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(),
+      body: JSON.stringify(box),
     })
       .then((res) => res.json())
       .then((json) => {
@@ -93,9 +94,19 @@ class message extends Component {
               <ScrollToBottom className="chatBody">
                 {this.state.messages.map((message) => {
                   if (message.nickname === localStorage.getItem("usernick")) {
-                    return <Allview nickname={message.nickname} message={message.message} />;
+                    return (
+                      <Allview
+                        nickname={message.nickname}
+                        message={message.message}
+                      />
+                    );
                   } else {
-                    return <Allview2 nickname={message.nickname} message={message.message} />;
+                    return (
+                      <Allview2
+                        nickname={message.nickname}
+                        message={message.message}
+                      />
+                    );
                   }
                 })}
                 {/* {this.state.messages.map((message) => {
@@ -110,7 +121,11 @@ class message extends Component {
             </div>
 
             <div className="chatInputBox">
-              <input className="messageInput" name="message" onChange={this.onchage} />
+              <input
+                className="messageInput"
+                name="message"
+                onChange={this.onchage}
+              />
               <button onClick={this.sendClick}>전송</button>
             </div>
           </div>

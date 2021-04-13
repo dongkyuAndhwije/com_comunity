@@ -122,7 +122,7 @@ class Main extends Component {
           id: "",
           clickmenu: this.state.clickmenu,
         };
-        fetch("http://localhost:3001/download", {
+        fetch("api/download", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
@@ -175,6 +175,7 @@ class Main extends Component {
     }
 
     console.log(this.state.clickmenu);
+    console.log("aaaa");
     // console.log(this.state.content);
 
     // rows = [];

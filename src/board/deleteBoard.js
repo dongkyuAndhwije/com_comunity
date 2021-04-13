@@ -29,7 +29,7 @@ class AlertDialogSlide extends Component {
       inputpw: this.state.inputpw, //입력 패스워드
       rownumber: this.props.data.number, //선택게시물넘버
     };
-    fetch("/api/deletePw", {
+    fetch("api/deletePw", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -42,7 +42,7 @@ class AlertDialogSlide extends Component {
           alert("비밀번호가 틀렸어요"); //비밀번호 틀림
         } else {
           alert("게시물이 삭제 되었습니다");
-          fetch("/api/deleteBoard", {
+          fetch("api/deleteBoard", {
             method: "post",
             headers: {
               "content-type": "application/json",
@@ -107,8 +107,17 @@ class AlertDialogSlide extends Component {
         >
           삭제
         </button>
-        <Dialog open={this.state.open} TransitionComponent={Transition} keepMounted onClose={this.handleClose} aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
-          <DialogTitle id="alert-dialog-slide-title">{"삭제하시려면 비밀번호를 입력하세요"}</DialogTitle>
+        <Dialog
+          open={this.state.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            {"삭제하시려면 비밀번호를 입력하세요"}
+          </DialogTitle>
           <DialogContent>
             <TextField
               //   className="write_title_"
