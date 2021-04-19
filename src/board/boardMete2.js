@@ -58,7 +58,8 @@ class BoardMete2 extends Component {
 
       let data = {
         reple: this.state.reple,
-        writer: this.state.writer,
+        // writer: this.state.writer,
+        writer: localStorage.getItem("usernick"),
         time: timestring,
         id: this.state.id,
         number: this.props.number,
